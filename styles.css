@@ -96,11 +96,67 @@ body {
     transform: translateX(70px);
     gap: 0.5em;
     margin-left: -2.5em;
+
 }
 
 .volume_panel {
     margin-left: 1.5em;
     transform: scale(1.2);
+    position: absolute;
+}
+
+.volume-rectangle {
+    display: none; /* Скрыт по умолчанию */
+    width: 50px; /* Ширина прямоугольника */
+    height: 180px; /* Высота прямоугольника */
+    background-color: #1E1E1E; /* Цвет прямоугольника */
+    position: absolute; /* Позиционируем относительно родителя */
+    z-index: 1;
+    top: -200px; /* Располагаем над кнопкой */
+    left: 50%; /* Центрируем по горизонтали относительно кнопки */
+    transform: translateX(-50%); /* Корректируем смещение для центрирования */
+    z-index: 100; /* Установите порядок расположения слоя */
+}
+
+
+.white-stripe {
+    width: 4px; /* Тонкая ширина полоски */
+    height: 70%; /* Высота полоски равна высоте прямоугольника */
+    background-color: white; /* Цвет полоски */
+    position: absolute; /* Позволяет позиционировать полоску внутри прямоугольника */
+    z-index: 1;
+    left: 50%; /* Центрируем полоску внутри прямоугольника */
+    transform: translateX(-50%); /* Корректируем смещение для центрирования */
+    top: 10%; /* Начинаем с верхней части прямоугольника */
+}
+
+.volume-level {
+    position: absolute;
+    top: 155px; /* Расстояние от белой полосы */
+    left: 50%; /* Центрирование */
+    transform: translateX(-50%);
+    font-size: 10px; /* Размер шрифта */
+    color: white; /* Цвет текста */
+}
+
+.slider {
+    position: absolute;
+    top: 80%; /* Для выравнивания по вертикали */
+    left: 50%; /* Начальное положение ползунка */
+    width: 10px; /* Увеличенная ширина ползунка */
+    height: 10px; /* Увеличенная высота ползунка */
+    background-color: gray; /* Цвет ползунка */
+    border-radius: 50%; /* Скругление углов для создания круглого ползунка */
+    transform: translate(-50%, -50%); /* Центрирование ползунка */
+    cursor: pointer; /* Курсор в виде указателя */
+    opacity: 1; /* Значение 1 для полной непрозрачности */
+    transition: background-color 0.3s; /* Плавный переход цвета */
+    z-index: 100;
+    transition: bottom 0.1s;
+}
+
+.slider:active {
+    background-color: darkgray; /* Изменение цвета при нажатии */
 }
 
 #play {
@@ -320,20 +376,12 @@ h1 {
     stroke: #ffffff;
     stroke-opacity: 0;
     display: inline-block;
-    transition: box-shadow 0.3s ease; /* Убираем transform из основного элемента */
+    transition: box-shadow 0.3s ease;
+    position: relative; /* Добавьте это свойство для использования z-index */
+    z-index: 10; /* Установите значение, которое достаточно высоко, чтобы быть поверх других объектов */
+
 }
 
-.svg_icons_panel_svg {
-    width: 45px;
-    height: 45px;
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-    fill: #dadada;
-    stroke: #ffffff;
-    stroke-opacity: 0;
-    display: inline-block;
-    transition: all .2s ease;
-}
 
 .svg_icons_panel_button {
     cursor: pointer;

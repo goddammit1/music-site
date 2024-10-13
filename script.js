@@ -47,24 +47,126 @@ likeButtons.forEach(button => {
     button.addEventListener('click', toggleLike);
 });
 
-function togglePlaylist() {
-    PlaylistButtons.forEach(button => {
-        button.classList.toggle('active');
+let isPlaying = false;
+
+const playButton = document.querySelector('#play').parentNode;
+const playIcon = document.querySelector('.play_icon');
+
+function updateButtonState() {
+    // Обновление состояния кнопки воспроизведения
+    if (isPlaying) {
+        playButton.innerHTML = `
+        <svg version="1.1" id="play" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="100%" height="100%" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
+        <path class="st0" d="M194.539,359.25h-26.967c-8.396,0-15.201-6.806-15.201-15.201V155.951c0-8.396,6.806-15.201,15.201-15.201
+        h26.967c8.396,0,15.201,6.806,15.201,15.201v188.097C209.74,352.444,202.934,359.25,194.539,359.25z"/>
+        <path class="st0" d="M332.429,359.25h-26.967c-8.396,0-15.201-6.806-15.201-15.201V155.951c0-8.396,6.806-15.201,15.201-15.201
+        h26.967c8.396,0,15.201,6.806,15.201,15.201v188.097C347.63,352.444,340.824,359.25,332.429,359.25z"/>
+        </svg>`;
+        // Код для воспроизведения музыки здесь
+    } else {
+        playButton.innerHTML = `
+        <svg version="1.1" id="play" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="100%" height="100%" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;"
+        xml:space="preserve">
+        <path class="st0" d="M174.152,357.323l166.105-94.435c9.82-5.583,9.834-19.731,0.025-25.332l-166.105-94.866
+        c-9.718-5.55-21.807,1.468-21.807,12.659V344.65C152.369,355.83,164.434,362.849,174.152,357.323z"/>
+        </svg>`;
+        // Код для остановки музыки здесь
+    }
+
+    // Обновление иконки воспроизведения
+    if (isPlaying) {
+        playIcon.innerHTML = `
+    <path d="M 500,1130 V 430 H 700 V 1130 Z" fill="black" stroke="black" stroke-width="10" />
+    <path d="M 800,1130 V 430 H 1000 V 1130 Z" fill="black" stroke="black" stroke-width="10" />
+`;
+    } else {
+        playIcon.innerHTML = `
+        <path d="M550,1150l600-340c35-20,35-70,0-90l-600-340c-35-20-80,5-80,45v680C470,1160,515,1180,550,1150z" fill="black" />
+    `;
+    }
+}
+
+playButton.addEventListener('click', function() {
+    isPlaying = !isPlaying; // Меняем состояние
+    updateButtonState(); // Обновляем кнопки
+});
+
+// Обработчик события для второй кнопки (если она есть)
+const secondPlayButton = document.querySelector('.play_button');
+if (secondPlayButton) {
+    secondPlayButton.addEventListener('click', function() {
+        isPlaying = !isPlaying; // Меняем состояние
+        updateButtonState(); // Обновляем кнопки
     });
 }
 
-// Добавляем обработчик событий на каждую кнопку "playlist"
-PlaylistButtons.forEach(button => {
-    button.addEventListener('click', togglePlaylist);
+// Глобальная переменная для состояния прямоугольника громкости
+let isVolumeRectangleVisible = false;
+
+// Обработчик события для кнопки громкости
+document.getElementById('volume').addEventListener('click', function(event) {
+    const rectangle = document.getElementById('volumeRectangle');
+
+    isVolumeRectangleVisible = !isVolumeRectangleVisible; // Меняем состояние
+
+    rectangle.style.display = isVolumeRectangleVisible ? 'block' : 'none'; // Показываем или скрываем прямоугольник
+
+    // Остановка распространения события, чтобы не скрывать сразу
+    event.stopPropagation();
 });
 
-function toggleNextup() {
-    NextupButtons.forEach(button => {
-        button.classList.toggle('active');
-    });
-}
+// Обработчик клика по документу
+document.addEventListener('click', function() {
+    const rectangle = document.getElementById('volumeRectangle');
 
-// Добавляем обработчик событий на каждую кнопку "nextup"
-NextupButtons.forEach(button => {
-    button.addEventListener('click', toggleNextup);
+    // Скрытие прямоугольника при клике в любое место страницы
+    if (isVolumeRectangleVisible) {
+        rectangle.style.display = 'none';
+        isVolumeRectangleVisible = false; // Обновляем состояние
+    }
 });
+
+
+
+
+
+
+const slider = document.getElementById('slider');
+const volumeLevel = document.getElementById('volumeLevel');
+const volumeRectangle = document.getElementById('volumeRectangle');
+const whiteStripe = document.querySelector('.white-stripe');
+
+let isDragging = false;
+
+slider.addEventListener('mousedown', () => {
+    isDragging = true;
+});
+
+document.addEventListener('mouseup', () => {
+    isDragging = false;
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+        // Получаем размеры и позицию белой полоски
+        const rect = volumeRectangle.getBoundingClientRect();
+        const stripeTop = rect.top + 0.09 * rect.height;
+        const stripeBottom = rect.top + 0.6 * rect.height;
+
+        let y = e.clientY; // Позиция курсора по Y
+
+        // Ограничиваем движение ползунка в пределах белой полоски
+        y = Math.max(stripeTop, Math.min(y, stripeBottom));
+
+        // Устанавливаем новую позицию ползунка
+        slider.style.top = `${y - rect.top}px`; // Вычитаем верхнюю границу белой полосы
+
+        // Вычисляем уровень громкости и меняем логику
+        const volume = Math.round(((stripeBottom - y) / (stripeBottom - stripeTop)) * 100);
+        volumeLevel.innerText = `${volume}%`;
+    }
+});
+
+
