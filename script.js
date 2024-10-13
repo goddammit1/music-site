@@ -167,6 +167,7 @@ const slider = document.getElementById('slider');
 const volumeLevel = document.getElementById('volumeLevel');
 const volumeRectangle = document.getElementById('volumeRectangle');
 const whiteStripe = document.querySelector('.white-stripe');
+const lvlStrip = document.querySelector('.lvl-strip'); // Объект для изменения роста
 
 let isDragging = false;
 let sliderPosition = 0; // Начальная позиция ползунка
@@ -186,23 +187,21 @@ document.addEventListener('mousemove', (e) => {
         const stripeTop = rect.top + 0.09 * rect.height;
         const stripeBottom = rect.top + 0.59 * rect.height;
 
-        let y = e.clientY; // Позиция курсора по Y
-        y = Math.max(stripeTop, Math.min(y, stripeBottom)); // Ограничиваем движение ползунка
+        let y = e.clientY;
+        y = Math.max(stripeTop, Math.min(y, stripeBottom));
 
-        // Устанавливаем новую позицию ползунка сразу
+        // Устанавливаем новую позицию ползунка
         slider.style.top = `${y - rect.top}px`;
 
-        // Вычисляем уровень громкости и обновляем значение
+        // Вычисляем уровень громкости
         const volume = Math.round(((stripeBottom - y) / (stripeBottom - stripeTop)) * 100);
         volumeLevel.innerText = `${volume}%`;
 
-        // Изменяем цвет полоски в зависимости от уровня громкости
-<<<<<<< Updated upstream
-        const gradientColor = `linear-gradient(to top, darkgray ${volume}%, white ${volume}%)`;
-=======
-        const gradientColor = `linear-gradient(0deg, darkgray ${volume}%, white ${volume}%)`;
->>>>>>> Stashed changes
-        whiteStripe.style.background = gradientColor;
+        // Получаем высоту ползунка
+        const sliderHeight = slider.offsetHeight;
+
+        // Меняем высоту .lvl-strip в зависимости от уровня громкости
+        lvlStrip.style.height = `${volume * (stripeBottom - stripeTop) / 100 + sliderHeight-5}px`;
     }
 });
 
@@ -213,7 +212,6 @@ volumeRectangle.addEventListener('click', (e) => {
     const stripeBottom = rect.top + 0.59 * rect.height;
 
     let y = e.clientY;
-
     y = Math.max(stripeTop, Math.min(y, stripeBottom));
 
     sliderPosition = y - rect.top;
@@ -222,13 +220,11 @@ volumeRectangle.addEventListener('click', (e) => {
     const volume = Math.round(((stripeBottom - y) / (stripeBottom - stripeTop)) * 100);
     volumeLevel.innerText = `${volume}%`;
 
-    // Изменяем цвет полоски после клика
-<<<<<<< Updated upstream
-    const gradientColor = `linear-gradient(to top, darkgray ${volume}%, white ${volume}%)`;
-=======
-    const gradientColor = `linear-gradient(0deg, darkgray ${volume}%, white ${volume}%)`;
->>>>>>> Stashed changes
-    whiteStripe.style.background = gradientColor;
+    // Получаем высоту ползунка
+    const sliderHeight = slider.offsetHeight;
+
+    // Обновляем высоту .lvl-strip в зависимости от уровня громкости
+    lvlStrip.style.height = `${volume * (stripeBottom - stripeTop) / 100 + sliderHeight-5}px`;
 });
 
 
