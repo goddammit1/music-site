@@ -133,7 +133,7 @@ document.getElementById('volume').addEventListener('click', function(event) {
 
     isVolumeRectangleVisible = !isVolumeRectangleVisible; // Меняем состояние
 
-    rectangle.style.display = isVolumeRectangleVisible ? 'block' : 'none'; // Показываем или скрываем прямоугольник
+    rectangle.style.opacity = isVolumeRectangleVisible ? '1' : '0'; // Показываем или скрываем прямоугольник
 
     // Остановка распространения события, чтобы не скрывать сразу
     event.stopPropagation();
@@ -149,7 +149,7 @@ document.addEventListener('click', function(event) {
     if (event.target !== rectangle && event.target !== whiteStrip && event.target !== volumeLevel) {
         // Скрытие прямоугольника при клике в любое место страницы
         if (isVolumeRectangleVisible) {
-            rectangle.style.display = 'none';
+            rectangle.style.opacity = '0';
             isVolumeRectangleVisible = false; // Обновляем состояние
         }
     }
@@ -172,7 +172,7 @@ let isDragging = false;
 let sliderPosition = 0; // Начальная позиция ползунка
 const speedFactor = 0.2; // Коэффициент для замедления
 
-slider.addEventListener('mousedown', () => {
+volumeRectangle.addEventListener('mousedown', () => {
     isDragging = true;
 });
 
@@ -197,7 +197,11 @@ document.addEventListener('mousemove', (e) => {
         volumeLevel.innerText = `${volume}%`;
 
         // Изменяем цвет полоски в зависимости от уровня громкости
+<<<<<<< Updated upstream
         const gradientColor = `linear-gradient(to top, darkgray ${volume}%, white ${volume}%)`;
+=======
+        const gradientColor = `linear-gradient(0deg, darkgray ${volume}%, white ${volume}%)`;
+>>>>>>> Stashed changes
         whiteStripe.style.background = gradientColor;
     }
 });
@@ -219,8 +223,13 @@ volumeRectangle.addEventListener('click', (e) => {
     volumeLevel.innerText = `${volume}%`;
 
     // Изменяем цвет полоски после клика
+<<<<<<< Updated upstream
     const gradientColor = `linear-gradient(to top, darkgray ${volume}%, white ${volume}%)`;
+=======
+    const gradientColor = `linear-gradient(0deg, darkgray ${volume}%, white ${volume}%)`;
+>>>>>>> Stashed changes
     whiteStripe.style.background = gradientColor;
 });
+
 
 
