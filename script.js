@@ -32,6 +32,8 @@ window.onload = () => {
 
 // доделать надо
 const likeButtons = document.querySelectorAll('#like, #like_button');
+const PlaylistButtons = document.querySelectorAll('#add_playlist, #add_playlist_button');
+const NextupButtons = document.querySelectorAll('#next_up, #next_up_button');
 
 // Функция для переключения активного состояния
 function toggleLike() {
