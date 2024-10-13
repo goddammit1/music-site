@@ -32,6 +32,8 @@ window.onload = () => {
 
 // доделать надо
 const likeButtons = document.querySelectorAll('#like, #like_button');
+const PlaylistButtons = document.querySelectorAll('#add_playlist, #add_playlist_button');
+const NextupButtons = document.querySelectorAll('#next_up, #next_up_button');
 
 // Функция для переключения активного состояния
 function toggleLike() {
@@ -43,4 +45,26 @@ function toggleLike() {
 // Добавляем обработчик событий на каждую кнопку "like"
 likeButtons.forEach(button => {
     button.addEventListener('click', toggleLike);
+});
+
+function togglePlaylist() {
+    PlaylistButtons.forEach(button => {
+        button.classList.toggle('active');
+    });
+}
+
+// Добавляем обработчик событий на каждую кнопку "playlist"
+PlaylistButtons.forEach(button => {
+    button.addEventListener('click', togglePlaylist);
+});
+
+function toggleNextup() {
+    NextupButtons.forEach(button => {
+        button.classList.toggle('active');
+    });
+}
+
+// Добавляем обработчик событий на каждую кнопку "nextup"
+NextupButtons.forEach(button => {
+    button.addEventListener('click', toggleNextup);
 });

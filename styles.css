@@ -154,11 +154,11 @@ body {
 }
 
 .play_button svg {
-    transition: transform 0.1s; /* Анимация при наведении */
+    transition: transform 0.3s ease; /* Анимация при наведении */
 }
 
 .play_button:hover svg {
-    transform: scale(1.05); /* Увеличение при наведении */
+    transform: scale(1.1); /* Увеличение при наведении */
 }
 .text_panel {
     margin:auto;
@@ -309,7 +309,6 @@ h1 {
 }
 
 .svg_icons_panel_svg {
-    cursor: pointer;
     width: 45px;
     height: 45px;
     background-color: rgba(0, 0, 0, 0);
@@ -322,7 +321,6 @@ h1 {
 }
 
 .svg_icons_panel_svg {
-    cursor: pointer;
     width: 45px;
     height: 45px;
     background-color: rgba(0, 0, 0, 0);
@@ -335,6 +333,7 @@ h1 {
 }
 
 .svg_icons_panel_button {
+    cursor: pointer;
     transition: all .2s ease;
 }
 
@@ -378,8 +377,7 @@ h1 {
 /* Эффекты при наведении */
 .soundtrack:hover .soundtrack_button {
     background-color: #dadada; /* Цвет кнопки при наведении */
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); /* Универсальная тень */
-    transform: scale(1.05); /* Небольшое увеличение при наведении */
+    box-shadow: 0 0 5px #ffffff; /* Универсальная тень */
 }
 .soundtrack_progressbar {
     min-width:1px;
