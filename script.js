@@ -192,9 +192,13 @@ document.addEventListener('mousemove', (e) => {
         // Устанавливаем новую позицию ползунка сразу
         slider.style.top = `${y - rect.top}px`;
 
-        // Вычисляем уровень громкости
+        // Вычисляем уровень громкости и обновляем значение
         const volume = Math.round(((stripeBottom - y) / (stripeBottom - stripeTop)) * 100);
         volumeLevel.innerText = `${volume}%`;
+
+        // Изменяем цвет полоски в зависимости от уровня громкости
+        const gradientColor = `linear-gradient(to top, darkgray ${volume}%, white ${volume}%)`;
+        whiteStripe.style.background = gradientColor;
     }
 });
 
@@ -204,19 +208,19 @@ volumeRectangle.addEventListener('click', (e) => {
     const stripeTop = rect.top + 0.09 * rect.height;
     const stripeBottom = rect.top + 0.59 * rect.height;
 
-    // Получаем позицию клика относительно элемента
     let y = e.clientY;
 
-    // Ограничиваем значение Y в пределах полоски
     y = Math.max(stripeTop, Math.min(y, stripeBottom));
 
-    // Перемещаем ползунок
-    sliderPosition = y - rect.top; // Целевая позиция
+    sliderPosition = y - rect.top;
     slider.style.top = `${sliderPosition}px`;
 
-    // Обновляем уровень громкости
     const volume = Math.round(((stripeBottom - y) / (stripeBottom - stripeTop)) * 100);
     volumeLevel.innerText = `${volume}%`;
+
+    // Изменяем цвет полоски после клика
+    const gradientColor = `linear-gradient(to top, darkgray ${volume}%, white ${volume}%)`;
+    whiteStripe.style.background = gradientColor;
 });
 
 
