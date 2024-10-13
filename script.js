@@ -86,7 +86,6 @@ function updateButtonState() {
     }
 }
 
-// Обработчик события для кнопки воспроизведения/паузы
 playButton.addEventListener('click', function() {
     isPlaying = !isPlaying; // Меняем состояние
     updateButtonState(); // Обновляем кнопки
@@ -101,14 +100,29 @@ if (secondPlayButton) {
     });
 }
 
-document.getElementById('volume').addEventListener('click', function() {
+// Глобальная переменная для состояния прямоугольника громкости
+let isVolumeRectangleVisible = false;
+
+// Обработчик события для кнопки громкости
+document.getElementById('volume').addEventListener('click', function(event) {
     const rectangle = document.getElementById('volumeRectangle');
 
-    // Проверка текущего состояния
-    if (rectangle.style.display === 'none' || rectangle.style.display === '') {
-        rectangle.style.display = 'block'; // Показываем прямоугольник
-    } else {
-        rectangle.style.display = 'none'; // Скрываем прямоугольник
+    isVolumeRectangleVisible = !isVolumeRectangleVisible; // Меняем состояние
+
+    rectangle.style.display = isVolumeRectangleVisible ? 'block' : 'none'; // Показываем или скрываем прямоугольник
+
+    // Остановка распространения события, чтобы не скрывать сразу
+    event.stopPropagation();
+});
+
+// Обработчик клика по документу
+document.addEventListener('click', function() {
+    const rectangle = document.getElementById('volumeRectangle');
+
+    // Скрытие прямоугольника при клике в любое место страницы
+    if (isVolumeRectangleVisible) {
+        rectangle.style.display = 'none';
+        isVolumeRectangleVisible = false; // Обновляем состояние
     }
 });
 
