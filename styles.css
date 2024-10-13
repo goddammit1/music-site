@@ -78,7 +78,7 @@ body {
     width: 50%;
     height: 50px;
     border-radius: 8px;
-    transition:opacity .5s .2s ease, .5s .1s cubic-bezier(.77,0,.18,1);
+    transition:opacity .05s .1s ease, .5s .1s cubic-bezier(.77,0,.18,1);
 }
 
 .music_panel_hidden.open {
@@ -152,16 +152,13 @@ body {
     width: 120%;
     height: 120%;
 }
-.svg_track_panel_button {
-    cursor: pointer;
-}
+
 .play_button svg {
-    position: relative;
-    transition: transform .3s ease; /* Анимация при наведении */
+    transition: transform 0.1s; /* Анимация при наведении */
 }
 
 .play_button:hover svg {
-    transform: scale(1.1);
+    transform: scale(1.05); /* Увеличение при наведении */
 }
 .text_panel {
     margin:auto;
@@ -312,6 +309,20 @@ h1 {
 }
 
 .svg_icons_panel_svg {
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    fill: #dadada;
+    stroke: #ffffff;
+    stroke-opacity: 0;
+    display: inline-block;
+    transition: box-shadow 0.3s ease; /* Убираем transform из основного элемента */
+}
+
+.svg_icons_panel_svg {
+    cursor: pointer;
     width: 45px;
     height: 45px;
     background-color: rgba(0, 0, 0, 0);
@@ -321,19 +332,18 @@ h1 {
     stroke-opacity: 0;
     display: inline-block;
     transition: all .2s ease;
-
 }
+
 .svg_icons_panel_button {
-    cursor: pointer;
     transition: all .2s ease;
 }
 
 .svg_icons_panel_svg:hover {
     transform: scale(1.1);
-    fill: #ffffff;
+    fill: #ffffff; /* Цвет заливки */
     stroke-opacity: 0.8;
-    stroke-width: 10;
-    
+    stroke-width: 10; /* Толщина обводки */
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 5px rgba(255, 255, 255, 0.3)); /* Уменьшение яркости свечения(0.3) */
 }
 .footer {
     width: 100%;
@@ -353,19 +363,23 @@ h1 {
     height:70%
 }
 .soundtrack_button {
-    left:-7px;
-    position:relative;
+    left: -7px;
+    position: relative;
     margin-top: auto;
     margin-bottom: auto;
     height: 100%;
     width: 12px;
     background-color: #757575;
     border-radius: 3px;
-    box-shadow: -10px 0px 20px rgba(0, 0, 0, 0.6);
-    transition: all .2s ease;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); /* Изменено */
+    transition: all 0.2s ease;
 }
+
+/* Эффекты при наведении */
 .soundtrack:hover .soundtrack_button {
-    background-color: #dadada;
+    background-color: #dadada; /* Цвет кнопки при наведении */
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); /* Универсальная тень */
+    transform: scale(1.05); /* Небольшое увеличение при наведении */
 }
 .soundtrack_progressbar {
     min-width:1px;

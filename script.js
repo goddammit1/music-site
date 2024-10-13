@@ -1,6 +1,6 @@
 let timeoutId;
 let timeoutId1;
-const delay = 3000; // время в миллисекундах
+const delay = 5000; // время в миллисекундах
 const delay_button = 100;
 let isActive1= false
 
@@ -31,20 +31,16 @@ window.onload = () => {
 };
 
 // доделать надо
-document.addEventListener('DOMContentLoaded', () => {
-    // Получаем все кнопки внутри body_settings
-    const buttons = document.querySelectorAll('.body_settings svg');
+const likeButtons = document.querySelectorAll('#like, #like_button');
 
-    buttons.forEach(button => {
-        button.addEventListener('click', function () {
-            // Если кнопка уже активна, убираем активный класс
-            if (button.classList.contains('active')) {
-                button.classList.remove('active');
-            }
-            // Если кнопка не активна, добавляем активный класс
-            else {
-                button.classList.add('active');
-            }
-        });
+// Функция для переключения активного состояния
+function toggleLike() {
+    likeButtons.forEach(button => {
+        button.classList.toggle('active');
     });
+}
+
+// Добавляем обработчик событий на каждую кнопку "like"
+likeButtons.forEach(button => {
+    button.addEventListener('click', toggleLike);
 });
