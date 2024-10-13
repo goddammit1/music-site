@@ -47,6 +47,28 @@ likeButtons.forEach(button => {
     button.addEventListener('click', toggleLike);
 });
 
+function togglePlaylist() {
+    PlaylistButtons.forEach(button => {
+        button.classList.toggle('active');
+    });
+}
+
+// Добавляем обработчик событий на каждую кнопку "like"
+PlaylistButtons.forEach(button => {
+    button.addEventListener('click', togglePlaylist);
+});
+
+function toggleNextup() {
+    NextupButtons.forEach(button => {
+        button.classList.toggle('active');
+    });
+}
+
+// Добавляем обработчик событий на каждую кнопку "like"
+NextupButtons.forEach(button => {
+    button.addEventListener('click', toggleNextup);
+});
+
 let isPlaying = false;
 
 const playButton = document.querySelector('#play').parentNode;
