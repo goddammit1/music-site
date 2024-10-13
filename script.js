@@ -197,11 +197,7 @@ document.addEventListener('mousemove', (e) => {
         volumeLevel.innerText = `${volume}%`;
 
         // Изменяем цвет полоски в зависимости от уровня громкости
-<<<<<<< Updated upstream
-        const gradientColor = `linear-gradient(to top, darkgray ${volume}%, white ${volume}%)`;
-=======
         const gradientColor = `linear-gradient(0deg, darkgray ${volume}%, white ${volume}%)`;
->>>>>>> Stashed changes
         whiteStripe.style.background = gradientColor;
     }
 });
@@ -223,11 +219,7 @@ volumeRectangle.addEventListener('click', (e) => {
     volumeLevel.innerText = `${volume}%`;
 
     // Изменяем цвет полоски после клика
-<<<<<<< Updated upstream
-    const gradientColor = `linear-gradient(to top, darkgray ${volume}%, white ${volume}%)`;
-=======
     const gradientColor = `linear-gradient(0deg, darkgray ${volume}%, white ${volume}%)`;
->>>>>>> Stashed changes
     whiteStripe.style.background = gradientColor;
 });
 
