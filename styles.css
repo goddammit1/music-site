@@ -285,6 +285,7 @@ h1 {
     opacity: 0.9;
     fill: red;
     stroke:red;
+    filter: drop-shadow(0 0 3px rgba(30, 0, 0, 0.5)) drop-shadow(0 0 5px rgba(30, 0, 0, 0.3));
 }
 #like.active:hover {
     opacity: 1;
@@ -294,6 +295,7 @@ h1 {
     opacity: 0.9;
     fill: red;
     stroke:red;
+    filter: drop-shadow(0 0 3px rgba(30, 0, 0, 0.5)) drop-shadow(0 0 5px rgba(30, 0, 0, 0.3));
 }
 #next_up.active:hover {
     opacity: 1;
@@ -303,6 +305,7 @@ h1 {
     opacity: 0.9;
     fill: red;
     stroke:red;
+    filter: drop-shadow(0 0 3px rgba(30, 0, 0, 0.5)) drop-shadow(0 0 5px rgba(30, 0, 0, 0.3));
 }
 #add_playlist.active:hover {
     opacity: 1;
@@ -342,7 +345,7 @@ h1 {
     fill: #ffffff; /* Цвет заливки */
     stroke-opacity: 0.8;
     stroke-width: 10; /* Толщина обводки */
-    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 5px rgba(255, 255, 255, 0.3)); /* Уменьшение яркости свечения(0.3) */
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.7)) drop-shadow(0 0 8px rgba(255, 255, 255, 0.5)); /* Уменьшение яркости свечения(0.3) */
 }
 .footer {
     width: 100%;
