@@ -129,6 +129,7 @@ body {
     left: 50%; /* Центрируем полоску внутри прямоугольника */
     transform: translateX(-50%); /* Корректируем смещение для центрирования */
     top: 10%; /* Начинаем с верхней части прямоугольника */
+    cursor: pointer;
 }
 
 .volume-level {
@@ -138,6 +139,10 @@ body {
     transform: translateX(-50%);
     font-size: 10px; /* Размер шрифта */
     color: white; /* Цвет текста */
+}
+
+#volumeLevel {
+    user-select: none; /* Запретить выделение текста */
 }
 
 .slider {

@@ -140,15 +140,23 @@ document.getElementById('volume').addEventListener('click', function(event) {
 });
 
 // Обработчик клика по документу
-document.addEventListener('click', function() {
+document.addEventListener('click', function(event) {
     const rectangle = document.getElementById('volumeRectangle');
+    const whiteStrip = document.getElementById('white-stripe');// Получаем элемент белой полоски
+    const volumeLevel = document.getElementById('volumeLevel');
 
-    // Скрытие прямоугольника при клике в любое место страницы
-    if (isVolumeRectangleVisible) {
-        rectangle.style.display = 'none';
-        isVolumeRectangleVisible = false; // Обновляем состояние
+    // Проверяем, был ли клик по прямоугольнику или белой полоске
+    if (event.target !== rectangle && event.target !== whiteStrip && event.target !== volumeLevel) {
+        // Скрытие прямоугольника при клике в любое место страницы
+        if (isVolumeRectangleVisible) {
+            rectangle.style.display = 'none';
+            isVolumeRectangleVisible = false; // Обновляем состояние
+        }
     }
 });
+
+
+
 
 
 
@@ -161,6 +169,8 @@ const volumeRectangle = document.getElementById('volumeRectangle');
 const whiteStripe = document.querySelector('.white-stripe');
 
 let isDragging = false;
+let sliderPosition = 0; // Начальная позиция ползунка
+const speedFactor = 0.2; // Коэффициент для замедления
 
 slider.addEventListener('mousedown', () => {
     isDragging = true;
@@ -172,23 +182,41 @@ document.addEventListener('mouseup', () => {
 
 document.addEventListener('mousemove', (e) => {
     if (isDragging) {
-        // Получаем размеры и позицию белой полоски
         const rect = volumeRectangle.getBoundingClientRect();
         const stripeTop = rect.top + 0.09 * rect.height;
-        const stripeBottom = rect.top + 0.6 * rect.height;
+        const stripeBottom = rect.top + 0.59 * rect.height;
 
         let y = e.clientY; // Позиция курсора по Y
+        y = Math.max(stripeTop, Math.min(y, stripeBottom)); // Ограничиваем движение ползунка
 
-        // Ограничиваем движение ползунка в пределах белой полоски
-        y = Math.max(stripeTop, Math.min(y, stripeBottom));
+        // Устанавливаем новую позицию ползунка сразу
+        slider.style.top = `${y - rect.top}px`;
 
-        // Устанавливаем новую позицию ползунка
-        slider.style.top = `${y - rect.top}px`; // Вычитаем верхнюю границу белой полосы
-
-        // Вычисляем уровень громкости и меняем логику
+        // Вычисляем уровень громкости
         const volume = Math.round(((stripeBottom - y) / (stripeBottom - stripeTop)) * 100);
         volumeLevel.innerText = `${volume}%`;
     }
+});
+
+// Обработчик клика по полоске
+volumeRectangle.addEventListener('click', (e) => {
+    const rect = volumeRectangle.getBoundingClientRect();
+    const stripeTop = rect.top + 0.09 * rect.height;
+    const stripeBottom = rect.top + 0.59 * rect.height;
+
+    // Получаем позицию клика относительно элемента
+    let y = e.clientY;
+
+    // Ограничиваем значение Y в пределах полоски
+    y = Math.max(stripeTop, Math.min(y, stripeBottom));
+
+    // Перемещаем ползунок
+    sliderPosition = y - rect.top; // Целевая позиция
+    slider.style.top = `${sliderPosition}px`;
+
+    // Обновляем уровень громкости
+    const volume = Math.round(((stripeBottom - y) / (stripeBottom - stripeTop)) * 100);
+    volumeLevel.innerText = `${volume}%`;
 });
 
 
