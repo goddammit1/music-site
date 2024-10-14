@@ -171,7 +171,7 @@ const lvlStrip = document.querySelector('.lvl-strip'); // Объект для и
 
 let isDragging = false;
 let sliderPosition = 0; // Начальная позиция ползунка
-const speedFactor = 0.2; // Коэффициент для замедления
+
 
 volumeRectangle.addEventListener('mousedown', () => {
     isDragging = true;
@@ -226,6 +226,62 @@ volumeRectangle.addEventListener('click', (e) => {
     // Обновляем высоту .lvl-strip в зависимости от уровня громкости
     lvlStrip.style.height = `${volume * (stripeBottom - stripeTop) / 100 + sliderHeight-5}px`;
 });
+
+
+
+const progressButton = document.querySelector('.soundtrack_button');
+const progressBar = document.querySelector('.soundtrack_progressbar');
+const soundtrack = document.querySelector('.soundtrack');
+
+let dragging = false;
+let currentLeft = 0; // Позиция кнопки
+let buttonWidth = progressButton.offsetWidth; // Ширина кнопки
+let initialMouseX = 0; // Начальная позиция мыши
+
+// Функция для инициализации
+function initializeDragging() {
+    progressButton.addEventListener('mousedown', (e) => {
+        dragging = true;
+        initialMouseX = e.clientX; // Сохраняем начальную позицию мыши
+        currentLeft = progressButton.offsetLeft; // Устанавливаем текущее положение кнопки
+        document.body.style.cursor = 'grabbing'; // Устанавливаем курсор
+    });
+
+    document.addEventListener('mouseup', () => {
+        dragging = false;
+        document.body.style.cursor = 'default'; // Возвращаем стандартный курсор
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (dragging) {
+            const boundingBox = soundtrack.getBoundingClientRect();
+            const minLeft = 0; // Минимальная позиция
+            const maxLeft = boundingBox.width - buttonWidth - 26; // Максимальная позиция
+
+            // Вычисляем новое положение кнопки
+            // Изменяем смещение с учетом начального положения
+            let deltaX = e.clientX - initialMouseX;
+            let newLeft = currentLeft + deltaX;
+
+            // Ограничиваем новое положение кнопки
+            newLeft = Math.max(minLeft, Math.min(newLeft, maxLeft));
+
+            // Устанавливаем новую позицию кнопки
+            updatePosition(newLeft); // Передаём новое значение в updatePosition
+        }
+    });
+}
+
+// Функция для обновления позиции кнопки и прогресс-бара
+function updatePosition(newLeft) {
+    requestAnimationFrame(() => {
+        progressButton.style.left = newLeft + 'px';
+        progressBar.style.width = newLeft - 3 + (buttonWidth / 2) + 'px';
+    });
+}
+
+// Инициализация
+initializeDragging();
 
 
 

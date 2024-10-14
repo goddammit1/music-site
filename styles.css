@@ -175,7 +175,7 @@ body {
     opacity: 1; /* Значение 1 для полной непрозрачности */
     transition: background-color 0.3s; /* Плавный переход цвета */
     z-index: 100;
-    transition: bottom 0.1s;
+    
 }
 
 
@@ -434,27 +434,31 @@ h1 {
     width: 35%;
     height:70%
 }
+.soundtrack {
+    position: relative;
+
+
+}
+
+.soundtrack_progressbar {
+    min-width: 0px;
+    height: 100%;
+    background: linear-gradient(to right, #1E1E1E, #5F5F5F);
+    position: relative; /* чтобы кнопка могла положительно влиять на его позицию */
+}
+
 .soundtrack_button {
     left: -7px;
-    position: relative;
+    position: absolute; /* изменено на absolute для движения в пределах родительского контейнера */
     margin-top: auto;
     margin-bottom: auto;
     height: 100%;
     width: 12px;
     background-color: #757575;
     border-radius: 3px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6); /* Уменьшено свечение */
-    transition: all 0.2s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    cursor: ew-resize;
 }
 
-/* Эффекты при наведении */
-.soundtrack:hover .soundtrack_button {
-    background-color: #dadada; /* Цвет кнопки при наведении */
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); /* Свечение белым цветом */
-    transform: scale(1.05); /* Небольшое увеличение при наведении */
-}
-.soundtrack_progressbar {
-    min-width:1px;
-    height: 100%;
-    background: linear-gradient(to right, #1E1E1E, #5F5F5F);
-}
+
+
