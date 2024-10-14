@@ -73,9 +73,16 @@ let isPlaying = false;
 
 const playButton = document.querySelector('#play').parentNode;
 const playIcon = document.querySelector('.play_icon');
+const audio = document.getElementById('audio');
+audio.addEventListener('ended', function() {
+    isPlaying = false; // Устанавливаем состояние "остановлено"
+    updateButtonState(); // Обновляем кнопки
+});
 
+
+
+// Обновление состояния кнопки воспроизведения
 function updateButtonState() {
-    // Обновление состояния кнопки воспроизведения
     if (isPlaying) {
         playButton.innerHTML = `
         <svg version="1.1" id="play" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -85,16 +92,17 @@ function updateButtonState() {
         <path class="st0" d="M332.429,359.25h-26.967c-8.396,0-15.201-6.806-15.201-15.201V155.951c0-8.396,6.806-15.201,15.201-15.201
         h26.967c8.396,0,15.201,6.806,15.201,15.201v188.097C347.63,352.444,340.824,359.25,332.429,359.25z"/>
         </svg>`;
-        // Код для воспроизведения музыки здесь
+        audio.play(); // Запускаем музыку
+        isPlaying = true;
     } else {
         playButton.innerHTML = `
         <svg version="1.1" id="play" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="100%" height="100%" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;"
-        xml:space="preserve">
+        width="100%" height="100%" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
         <path class="st0" d="M174.152,357.323l166.105-94.435c9.82-5.583,9.834-19.731,0.025-25.332l-166.105-94.866
         c-9.718-5.55-21.807,1.468-21.807,12.659V344.65C152.369,355.83,164.434,362.849,174.152,357.323z"/>
         </svg>`;
-        // Код для остановки музыки здесь
+        audio.pause(); // Останавливаем музыку
+        isPlaying = false; // Устанавливаем состояние "остановлено"
     }
 
     // Обновление иконки воспроизведения
@@ -110,8 +118,9 @@ function updateButtonState() {
     }
 }
 
+// Код для инициализации кнопки воспроизведения
 playButton.addEventListener('click', function() {
-    isPlaying = !isPlaying; // Меняем состояние
+    isPlaying = !isPlaying; // Изменяем состояние
     updateButtonState(); // Обновляем кнопки
 });
 
@@ -167,10 +176,35 @@ const slider = document.getElementById('slider');
 const volumeLevel = document.getElementById('volumeLevel');
 const volumeRectangle = document.getElementById('volumeRectangle');
 const whiteStripe = document.querySelector('.white-stripe');
+const lvlStrip = document.querySelector('.lvl-strip');
 
 let isDragging = false;
-let sliderPosition = 0; // Начальная позиция ползунка
-const speedFactor = 0.2; // Коэффициент для замедления
+let sliderPosition = 0;
+
+
+audio.volume = 0.5;
+
+// Вычисляем начальное положение ползунка
+function setInitialSliderPosition() {
+    const rect = volumeRectangle.getBoundingClientRect();
+    const stripeTop = rect.top + 0.09 * rect.height;
+    const stripeBottom = rect.top + 0.59 * rect.height;
+
+    // 0.5 соответствует 50%
+    const initialVolume = 0.5;
+    const volume = Math.round(initialVolume * 100);
+
+    // Находим положение ползунка
+    const y = stripeBottom - (volume / 100) * (stripeBottom - stripeTop);
+
+    // Устанавливаем позицию ползунка
+    slider.style.top = `${y - rect.top}px`;
+    volumeLevel.innerText = `${volume}%`;
+    lvlStrip.style.height = `${volume * (stripeBottom - stripeTop) / 100 + slider.offsetHeight - 5}px`;
+}
+
+// Устанавливаем начальную позицию ползунка
+setInitialSliderPosition();
 
 volumeRectangle.addEventListener('mousedown', () => {
     isDragging = true;
@@ -186,30 +220,26 @@ document.addEventListener('mousemove', (e) => {
         const stripeTop = rect.top + 0.09 * rect.height;
         const stripeBottom = rect.top + 0.59 * rect.height;
 
-        let y = e.clientY; // Позиция курсора по Y
-        y = Math.max(stripeTop, Math.min(y, stripeBottom)); // Ограничиваем движение ползунка
+        let y = e.clientY;
+        y = Math.max(stripeTop, Math.min(y, stripeBottom));
 
-        // Устанавливаем новую позицию ползунка сразу
         slider.style.top = `${y - rect.top}px`;
 
-        // Вычисляем уровень громкости и обновляем значение
         const volume = Math.round(((stripeBottom - y) / (stripeBottom - stripeTop)) * 100);
         volumeLevel.innerText = `${volume}%`;
+        audio.volume = volume / 100;
 
-        // Изменяем цвет полоски в зависимости от уровня громкости
-        const gradientColor = `linear-gradient(0deg, darkgray ${volume}%, white ${volume}%)`;
-        whiteStripe.style.background = gradientColor;
+        const sliderHeight = slider.offsetHeight;
+        lvlStrip.style.height = `${volume * (stripeBottom - stripeTop) / 100 + sliderHeight - 5}px`;
     }
 });
 
-// Обработчик клика по полоске
 volumeRectangle.addEventListener('click', (e) => {
     const rect = volumeRectangle.getBoundingClientRect();
     const stripeTop = rect.top + 0.09 * rect.height;
     const stripeBottom = rect.top + 0.59 * rect.height;
 
     let y = e.clientY;
-
     y = Math.max(stripeTop, Math.min(y, stripeBottom));
 
     sliderPosition = y - rect.top;
@@ -217,11 +247,107 @@ volumeRectangle.addEventListener('click', (e) => {
 
     const volume = Math.round(((stripeBottom - y) / (stripeBottom - stripeTop)) * 100);
     volumeLevel.innerText = `${volume}%`;
+    audio.volume = volume / 100;
 
-    // Изменяем цвет полоски после клика
-    const gradientColor = `linear-gradient(0deg, darkgray ${volume}%, white ${volume}%)`;
-    whiteStripe.style.background = gradientColor;
+    const sliderHeight = slider.offsetHeight;
+    lvlStrip.style.height = `${volume * (stripeBottom - stripeTop) / 100 + sliderHeight - 5}px`;
 });
+
+
+
+const progressButton = document.querySelector('.soundtrack_button');
+const progressBar = document.querySelector('.soundtrack_progressbar');
+const soundtrack = document.querySelector('.soundtrack');
+
+let dragging = false;
+let currentLeft = 0;
+let buttonWidth = progressButton.offsetWidth;
+let initialMouseX = 0;
+let playing = false;
+
+function initializeDragging() {
+    progressButton.addEventListener('mousedown', (e) => {
+        dragging = true;
+        initialMouseX = e.clientX;
+        currentLeft = progressButton.offsetLeft;
+        document.body.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (dragging) {
+            // Вычисляем новое время воспроизведения
+            const boundingBox = soundtrack.getBoundingClientRect();
+            const maxLeft = boundingBox.width - buttonWidth - 26;
+
+            // Находим новую позицию кнопки и обновляем время
+            const newLeft = progressButton.offsetLeft; // Получаем текущую позицию кнопки
+            const progressPercentage = newLeft / maxLeft;
+
+            // Устанавливаем новое время для аудио
+            audio.currentTime = progressPercentage * audio.duration;
+        }
+        dragging = false;
+        document.body.style.cursor = 'default';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (dragging) {
+            const boundingBox = soundtrack.getBoundingClientRect();
+            const minLeft = 0;
+            const maxLeft = boundingBox.width - buttonWidth - 26;
+
+            let deltaX = e.clientX - initialMouseX;
+            let newLeft = currentLeft + deltaX;
+            newLeft = Math.max(minLeft, Math.min(newLeft, maxLeft));
+
+            updatePosition(newLeft);
+        }
+    });
+}
+
+function updatePosition(newLeft) {
+    requestAnimationFrame(() => {
+        progressButton.style.left = newLeft + 'px';
+        progressBar.style.width = newLeft - 3 + (buttonWidth / 2) + 'px';
+    });
+}
+
+function updateButtonPosition() {
+    if (playing && !dragging) {
+        const boundingBox = soundtrack.getBoundingClientRect();
+        const maxLeft = boundingBox.width - buttonWidth - 26;
+        const duration = audio.duration;
+        const currentTime = audio.currentTime;
+
+        const progressPercentage = currentTime / duration;
+        const newLeft = maxLeft * progressPercentage;
+
+        updatePosition(newLeft);
+    }
+}
+
+function playAudio() {
+    audio.play();
+    playing = true;
+    const update = () => {
+        if (playing) {
+            updateButtonPosition();
+            requestAnimationFrame(update);
+        }
+    };
+    requestAnimationFrame(update);
+}
+
+audio.addEventListener('play', playAudio);
+audio.addEventListener('pause', () => {
+    playing = false;
+});
+audio.addEventListener('ended', () => {
+    playing = false;
+    updatePosition(0);
+});
+
+initializeDragging();
 
 
 
