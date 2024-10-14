@@ -153,9 +153,10 @@ document.addEventListener('click', function(event) {
     const rectangle = document.getElementById('volumeRectangle');
     const whiteStrip = document.getElementById('white-stripe');// Получаем элемент белой полоски
     const volumeLevel = document.getElementById('volumeLevel');
+    const lvlStrip = document.querySelector('.lvl-strip');
 
     // Проверяем, был ли клик по прямоугольнику или белой полоске
-    if (event.target !== rectangle && event.target !== whiteStrip && event.target !== volumeLevel) {
+    if (event.target !== rectangle && event.target !== whiteStrip && event.target !== volumeLevel && event.target !== lvlStrip) {
         // Скрытие прямоугольника при клике в любое место страницы
         if (isVolumeRectangleVisible) {
             rectangle.style.opacity = '0';
@@ -182,7 +183,7 @@ let isDragging = false;
 let sliderPosition = 0;
 
 
-audio.volume = 0.5;
+audio.volume = 0;
 
 // Вычисляем начальное положение ползунка
 function setInitialSliderPosition() {
@@ -191,7 +192,7 @@ function setInitialSliderPosition() {
     const stripeBottom = rect.top + 0.59 * rect.height;
 
     // 0.5 соответствует 50%
-    const initialVolume = 0.5;
+    const initialVolume = 0;
     const volume = Math.round(initialVolume * 100);
 
     // Находим положение ползунка
@@ -219,8 +220,8 @@ document.addEventListener('mousemove', (e) => {
         const rect = volumeRectangle.getBoundingClientRect();
         const stripeTop = rect.top + 0.09 * rect.height;
         const stripeBottom = rect.top + 0.59 * rect.height;
-
-        let y = e.clientY;
+        
+        let y = e.clientY-30;
         y = Math.max(stripeTop, Math.min(y, stripeBottom));
 
         slider.style.top = `${y - rect.top}px`;
@@ -239,7 +240,7 @@ volumeRectangle.addEventListener('click', (e) => {
     const stripeTop = rect.top + 0.09 * rect.height;
     const stripeBottom = rect.top + 0.59 * rect.height;
 
-    let y = e.clientY;
+    let y = e.clientY-30;
     y = Math.max(stripeTop, Math.min(y, stripeBottom));
 
     sliderPosition = y - rect.top;
@@ -270,14 +271,13 @@ function initializeDragging() {
         dragging = true;
         initialMouseX = e.clientX;
         currentLeft = progressButton.offsetLeft;
-        document.body.style.cursor = 'grabbing';
     });
 
     document.addEventListener('mouseup', () => {
         if (dragging) {
             // Вычисляем новое время воспроизведения
             const boundingBox = soundtrack.getBoundingClientRect();
-            const maxLeft = boundingBox.width - buttonWidth - 26;
+            const maxLeft = boundingBox.width - buttonWidth - 35;
 
             // Находим новую позицию кнопки и обновляем время
             const newLeft = progressButton.offsetLeft; // Получаем текущую позицию кнопки
@@ -294,7 +294,7 @@ function initializeDragging() {
         if (dragging) {
             const boundingBox = soundtrack.getBoundingClientRect();
             const minLeft = 0;
-            const maxLeft = boundingBox.width - buttonWidth - 26;
+            const maxLeft = boundingBox.width - buttonWidth - 35;
 
             let deltaX = e.clientX - initialMouseX;
             let newLeft = currentLeft + deltaX;
@@ -308,14 +308,14 @@ function initializeDragging() {
 function updatePosition(newLeft) {
     requestAnimationFrame(() => {
         progressButton.style.left = newLeft + 'px';
-        progressBar.style.width = newLeft - 3 + (buttonWidth / 2) + 'px';
+        progressBar.style.width = newLeft - 6 + (buttonWidth / 2) + 'px';
     });
 }
 
 function updateButtonPosition() {
     if (playing && !dragging) {
         const boundingBox = soundtrack.getBoundingClientRect();
-        const maxLeft = boundingBox.width - buttonWidth - 26;
+        const maxLeft = boundingBox.width - buttonWidth - 29;
         const duration = audio.duration;
         const currentTime = audio.currentTime;
 

@@ -108,7 +108,7 @@ body {
 
 
 .volume-rectangle {
-    transition: .3s ease;
+    transition: opacity .3s ease;
     opacity:0;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
     border-radius: 15px;
@@ -138,15 +138,16 @@ body {
 }
 
 .lvl-strip {
-    border-radius: 15px;
-    width: 7px; /* Тонкая ширина полоски */
+    width: 8px; /* Тонкая ширина полоски */
     height: 1px; /* Высота полоски равна высоте прямоугольника */
-    background: linear-gradient(180deg, #363636, #121212);
+    background: linear-gradient(0deg, #1E1E1E, #5F5F5F);
     position: absolute; /* Позволяет позиционировать полоску внутри прямоугольника */
     z-index: 2;
+    border-bottom-left-radius:15px;
+    border-bottom-right-radius:15px;
     left: 50%; /* Центрируем полоску внутри прямоугольника */
     transform: translateX(-50%); /* Корректируем смещение для центрирования */
-    bottom: 20%; /* Начинаем с нижней части прямоугольника */
+    bottom: 19%; /* Начинаем с нижней части прямоугольника */
     transition: background-color 0.3s; /* Плавный переход цвета */
 }
 
@@ -164,6 +165,8 @@ body {
 }
 
 .slider {
+    margin-top:2px;
+    pointer-events: none;
     position: absolute;
     top: 80%; /* Для выравнивания по вертикали */
     left: 50%; /* Начальное положение ползунка */
@@ -440,6 +443,7 @@ h1 {
 }
 
 .soundtrack_progressbar {
+    transition: .02s;
     min-width: 0px;
     height: 100%;
     background: linear-gradient(to right, #1E1E1E, #5F5F5F);
@@ -447,7 +451,7 @@ h1 {
 }
 
 .soundtrack_button {
-    left: -7px;
+    transition: .02s;
     position: absolute; /* изменено на absolute для движения в пределах родительского контейнера */
     margin-top: auto;
     margin-bottom: auto;
@@ -456,7 +460,7 @@ h1 {
     background-color: #757575;
     border-radius: 3px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-    cursor: ew-resize;
+    cursor: pointer;
 }
 
 
