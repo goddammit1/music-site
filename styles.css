@@ -175,7 +175,7 @@ body {
     opacity: 1; /* Значение 1 для полной непрозрачности */
     transition: background-color 0.3s; /* Плавный переход цвета */
     z-index: 100;
-    
+
 }
 
 
