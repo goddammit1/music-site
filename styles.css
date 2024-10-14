@@ -125,6 +125,7 @@ body {
 }
 
 .white-stripe {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     width: 7px; /* Тонкая ширина полоски */
     height: 70%; /* Высота полоски равна высоте прямоугольника */
@@ -363,8 +364,8 @@ h1 {
 
 #like.active {
     opacity: 0.9;
-    fill: red;
-    stroke:red;
+    fill: #CEB564;
+    stroke:#CEB564;
 
 }
 #like.active:hover {
@@ -373,8 +374,8 @@ h1 {
 
 #next_up.active {
     opacity: 0.9;
-    fill: red;
-    stroke:red;
+    fill: #CEB564;
+    stroke: #CEB564;
 
 }
 #next_up.active:hover {
@@ -383,8 +384,8 @@ h1 {
 
 #add_playlist.active {
     opacity: 0.9;
-    fill: red;
-    stroke:red;
+    fill:#CEB564;
+    stroke:#CEB564;
 
 }
 #add_playlist.active:hover {
@@ -443,6 +444,7 @@ h1 {
 }
 
 .soundtrack_progressbar {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
     transition: .02s;
     min-width: 0px;
     height: 100%;
