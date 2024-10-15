@@ -182,8 +182,8 @@ const lvlStrip = document.querySelector('.lvl-strip');
 let isDragging = false;
 let sliderPosition = 0;
 
-
-audio.volume = 0;
+const initialVolume = 0.2; // Установим начальный уровень громкости на 50%
+audio.volume = initialVolume;
 
 // Вычисляем начальное положение ползунка
 function setInitialSliderPosition() {
@@ -191,17 +191,13 @@ function setInitialSliderPosition() {
     const stripeTop = rect.top + 0.09 * rect.height;
     const stripeBottom = rect.top + 0.59 * rect.height;
 
-    // 0.5 соответствует 50%
-    const initialVolume = 0;
-    const volume = Math.round(initialVolume * 100);
-
     // Находим положение ползунка
-    const y = stripeBottom - (volume / 100) * (stripeBottom - stripeTop);
+    const y = stripeBottom - (initialVolume * (stripeBottom - stripeTop));
 
     // Устанавливаем позицию ползунка
     slider.style.top = `${y - rect.top}px`;
-    volumeLevel.innerText = `${volume}%`;
-    lvlStrip.style.height = `${volume * (stripeBottom - stripeTop) / 100 + slider.offsetHeight - 5}px`;
+    volumeLevel.innerText = `${Math.round(initialVolume * 100)}%`;
+    lvlStrip.style.height = `${initialVolume * (stripeBottom - stripeTop) + slider.offsetHeight - 5}px`;
 }
 
 // Устанавливаем начальную позицию ползунка
@@ -220,8 +216,8 @@ document.addEventListener('mousemove', (e) => {
         const rect = volumeRectangle.getBoundingClientRect();
         const stripeTop = rect.top + 0.09 * rect.height;
         const stripeBottom = rect.top + 0.59 * rect.height;
-        
-        let y = e.clientY-30;
+
+        let y = e.clientY - 30;
         y = Math.max(stripeTop, Math.min(y, stripeBottom));
 
         slider.style.top = `${y - rect.top}px`;
@@ -240,7 +236,7 @@ volumeRectangle.addEventListener('click', (e) => {
     const stripeTop = rect.top + 0.09 * rect.height;
     const stripeBottom = rect.top + 0.59 * rect.height;
 
-    let y = e.clientY-30;
+    let y = e.clientY - 30;
     y = Math.max(stripeTop, Math.min(y, stripeBottom));
 
     sliderPosition = y - rect.top;
