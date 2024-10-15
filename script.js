@@ -143,6 +143,9 @@ document.getElementById('volume').addEventListener('click', function(event) {
     isVolumeRectangleVisible = !isVolumeRectangleVisible; // Меняем состояние
 
     rectangle.style.opacity = isVolumeRectangleVisible ? '1' : '0'; // Показываем или скрываем прямоугольник
+    rectangle.style.height = isVolumeRectangleVisible ? '180px' : '50px';
+    rectangle.style.top = isVolumeRectangleVisible ? '-180px' : '-40px';
+    rectangle.style.pointerEvents = isVolumeRectangleVisible ? 'all' : 'none';
 
     // Остановка распространения события, чтобы не скрывать сразу
     event.stopPropagation();
