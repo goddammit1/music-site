@@ -258,6 +258,7 @@ volumeRectangle.addEventListener('click', (e) => {
 const progressButton = document.querySelector('.soundtrack_button');
 const progressBar = document.querySelector('.soundtrack_progressbar');
 const soundtrack = document.querySelector('.soundtrack');
+const timeDisplay = document.querySelector('.time_display'); // Элемент для отображения времени
 
 let dragging = false;
 let currentLeft = 0;
@@ -265,28 +266,41 @@ let buttonWidth = progressButton.offsetWidth;
 let initialMouseX = 0;
 let playing = false;
 
+// Начальное состояние времени - скрыто
+timeDisplay.style.visibility = 'hidden';
+
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`; // Добавляем ведущий ноль к секундам
+}
+
 function initializeDragging() {
     progressButton.addEventListener('mousedown', (e) => {
         dragging = true;
         initialMouseX = e.clientX;
         currentLeft = progressButton.offsetLeft;
+
+        // Показываем время, когда пользователь начинает перетаскивать
+        timeDisplay.style.visibility = 'visible';
     });
 
     document.addEventListener('mouseup', () => {
         if (dragging) {
-            // Вычисляем новое время воспроизведения
             const boundingBox = soundtrack.getBoundingClientRect();
             const maxLeft = boundingBox.width - buttonWidth - 35;
 
-            // Находим новую позицию кнопки и обновляем время
-            const newLeft = progressButton.offsetLeft; // Получаем текущую позицию кнопки
+            const newLeft = progressButton.offsetLeft;
             const progressPercentage = newLeft / maxLeft;
 
-            // Устанавливаем новое время для аудио
             audio.currentTime = progressPercentage * audio.duration;
+            updateTimeDisplay(audio.currentTime); // Обновляем отображение времени
         }
         dragging = false;
         document.body.style.cursor = 'default';
+
+        // Скрываем время, когда пользователь отпускает кнопку
+        timeDisplay.style.visibility = 'hidden';
     });
 
     document.addEventListener('mousemove', (e) => {
@@ -300,6 +314,10 @@ function initializeDragging() {
             newLeft = Math.max(minLeft, Math.min(newLeft, maxLeft));
 
             updatePosition(newLeft);
+
+            // Обновляем отображение времени, соответствующего положению кнопки
+            const progressPercentage = newLeft / maxLeft;
+            updateTimeDisplay(progressPercentage * audio.duration);
         }
     });
 }
@@ -325,9 +343,14 @@ function updateButtonPosition() {
     }
 }
 
+function updateTimeDisplay(time) {
+    timeDisplay.textContent = formatTime(time);
+}
+
 function playAudio() {
     audio.play();
     playing = true;
+
     const update = () => {
         if (playing) {
             updateButtonPosition();
@@ -336,6 +359,8 @@ function playAudio() {
     };
     requestAnimationFrame(update);
 }
+
+
 
 audio.addEventListener('play', playAudio);
 audio.addEventListener('pause', () => {
