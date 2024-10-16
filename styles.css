@@ -39,6 +39,7 @@ body {
 }
 
 .music_panel_area.hidden {
+    cursor: default;
     bottom: -30px;
     opacity: 0;
     pointer-events: none;
@@ -104,7 +105,6 @@ body {
     transform: scale(1.2);
     position: absolute;
 }
-
 
 
 .volume-rectangle {
@@ -425,6 +425,7 @@ h1 {
     height:10em;
 }
 .soundtrack {
+    transition: none;
     pointer-events: all;
     transform: translateX(70px);
     padding-left: 10px;
@@ -465,5 +466,29 @@ h1 {
     cursor: pointer;
 }
 
-
+.time_display {
+    transition: .2s ease;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    margin-top:auto;
+    margin-bottom:auto;
+    bottom:50px;
+    right: 40px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    width: 100px;
+    height: 35px;
+    background:#1E1E1E;
+    user-select: none;
+}
+.time_display_current {
+    font-weight: 700;
+    display: flex;
+    font-size: 1.05rem;
+    right:0px;
+    position: relative;
+    text-align: center;
+    margin:auto;
+}
 

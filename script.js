@@ -259,6 +259,8 @@ const progressButton = document.querySelector('.soundtrack_button');
 const progressBar = document.querySelector('.soundtrack_progressbar');
 const soundtrack = document.querySelector('.soundtrack');
 const timeDisplay = document.querySelector('.time_display'); // Элемент для отображения времени
+const timeDisplayCurrent = document.querySelector('.time_display_current')
+
 
 let dragging = false;
 let currentLeft = 0;
@@ -267,7 +269,8 @@ let initialMouseX = 0;
 let playing = false;
 
 // Начальное состояние времени - скрыто
-timeDisplay.style.visibility = 'hidden';
+timeDisplay.style.opacity = '0';
+timeDisplay.style.top = '-20px'
 
 function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
@@ -282,7 +285,8 @@ function initializeDragging() {
         currentLeft = progressButton.offsetLeft;
 
         // Показываем время, когда пользователь начинает перетаскивать
-        timeDisplay.style.visibility = 'visible';
+        timeDisplay.style.opacity = '1';
+        timeDisplay.style.top= '-50px';
     });
 
     document.addEventListener('mouseup', () => {
@@ -300,7 +304,8 @@ function initializeDragging() {
         document.body.style.cursor = 'default';
 
         // Скрываем время, когда пользователь отпускает кнопку
-        timeDisplay.style.visibility = 'hidden';
+        timeDisplay.style.opacity = '0';
+        timeDisplay.style.top = '-20px'
     });
 
     document.addEventListener('mousemove', (e) => {
@@ -344,7 +349,7 @@ function updateButtonPosition() {
 }
 
 function updateTimeDisplay(time) {
-    timeDisplay.textContent = formatTime(time);
+    timeDisplayCurrent.textContent = formatTime(time)+' / ' + formatTime(audio.duration);
 }
 
 function playAudio() {
