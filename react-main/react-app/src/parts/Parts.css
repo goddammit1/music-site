@@ -1,0 +1,43 @@
+.sign_cont {
+    margin-left: 800px;
+    display:flex;
+    position: relative;
+}
+.sign_in {
+    transition: .4s ease;
+    font-size: 1.2rem;
+    background-color: rgb(0, 0, 0, 0);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-right: 1em;
+    border-radius: 22.5px;
+    color: #CEB564;
+    border: 3px solid #CEB564;
+    width: 130px;
+    height: 45px;
+}
+.sign_up {
+    transition: .4s ease;
+    font-size: 1.2rem;
+    background-color: rgb(0, 0, 0, 0);
+    border: none;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 22.5px;
+    margin: auto;
+    background-color: #CEB564;
+    color: #dadada;
+    width: 130px;
+    height: 45px;
+}
+.sign_up:hover {
+    cursor:pointer;
+    transform: scale(1.05);
+}
+.sign_in:hover {
+    cursor:pointer;
+    transform: scale(1.05);
+}
