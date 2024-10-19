@@ -1,5 +1,5 @@
 import './Parts.css'
-function Header() {
+function HeaderSign() {
     return (
         <>
             <div className='sign_cont'>
@@ -17,4 +17,4 @@ function Header() {
         </>
     );
 }
-export default Header
+export default HeaderSign

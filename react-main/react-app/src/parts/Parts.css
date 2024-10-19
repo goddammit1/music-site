@@ -1,9 +1,9 @@
-.sign_cont {
+.sign_cont {    /*подгонка кнопок регистрации по правому краю*/
     margin-left: 800px;
     display:flex;
     position: relative;
 }
-.sign_in {
+.sign_in {      /*кнопка войти*/
     transition: .4s ease;
     font-size: 1.2rem;
     background-color: rgb(0, 0, 0, 0);
@@ -15,10 +15,10 @@
     border-radius: 22.5px;
     color: #CEB564;
     border: 3px solid #CEB564;
-    width: 130px;
+    width: 140px;
     height: 45px;
 }
-.sign_up {
+.sign_up {      /*кнопка регистрация*/
     transition: .4s ease;
     font-size: 1.2rem;
     background-color: rgb(0, 0, 0, 0);
@@ -30,14 +30,95 @@
     margin: auto;
     background-color: #CEB564;
     color: #dadada;
-    width: 130px;
+    width: 140px;
     height: 45px;
 }
-.sign_up:hover {
+.sign_up:hover {    /*увеличение кнопки при наводке*/
     cursor:pointer;
     transform: scale(1.05);
 }
-.sign_in:hover {
+.sign_in:hover {    /*увеличение кнопки при наводке*/
     cursor:pointer;
     transform: scale(1.05);
+}
+.MusicCard {                                        /* плитка рандомного трека */
+    color: #dadada;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    height: 340px;
+    width: 250px;
+    border-radius: 20px;
+}
+.MusicCardImg {  
+    user-select: none;   /*подгонка обложки трека под плитку*/
+    width: 250px;
+    height: 250px;
+    border-radius: 20px;
+}
+
+.play_button {      /*зона кнопки*/
+    transition: .3s ease;
+    border-radius: 20px;
+    display:flex;
+    margin: auto;
+    position: relative;
+    bottom:253px;   
+    height: 250px;
+    width: 250px;
+}
+.play_button1{      /*кнопка play*/
+    opacity: 0;;
+    transition: .2s ease;
+    margin: auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #dadada;
+}
+
+.play_button:hover .play_button1 {    /*появление кнопки при наведении*/
+    transform: scale(1.1);
+    opacity: 1;
+}   
+.play_button:hover {    /*затемнение фона при наведении*/
+    cursor: pointer;
+    background-color: rgb(0, 0, 0, 0.3);
+}
+
+.music_name {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.music_ref {
+    position: relative;
+    bottom:250px;
+    margin-left: 1em;
+} 
+
+.album-panel{
+    font-size: 0.7em;
+    border-radius: 20px;
+    margin-left: 20px;
+    color: #dadada;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    height: 170px;
+    width: 340px;
+}
+.albums-panel-area {
+    margin: 20px;
+}
+.album_img {
+    margin-right: 15px;
+    user-select: none;
+    width: 90px;
+    height: 90px;
+    border-radius: 15px;
+}
+.play_button_album {
+    width: 40px;
+    height: 40px;
+    background-color: #dadada;
+    border-radius:50%;
+}
+.album_img:hover {
+    cursor: pointer;
 }
