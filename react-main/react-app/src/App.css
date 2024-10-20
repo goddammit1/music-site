@@ -6,9 +6,9 @@ body {
   font-family: "Programme", Arial, sans-serif;
   color: #dadada;
   height: 100%;
-	min-height: 100%;
-	display: flex;
-	flex-direction: column;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 /*верх страницы*/
@@ -22,14 +22,28 @@ body {
 
 /*основной контейнер*/
 .main-panel {
-  display:flex;
+  display: flex;
   height: 1800px;
   margin-right: auto;
   margin-left: auto;
   width: 1030px;
-  background-color: #1E1E1E;
+  background-color: #1e1e1e;
 }
 .main-panel-area {
-  display:flex;
+  display: flex;
   margin: 2.5em;
+}
+.albums-artists {
+  display: grid;
+  gap: 30px;
+  height: fit-content;
+}
+.Flex {
+  display: flex;
+  gap:20px;
+}
+.Gird {
+  height: fit-content;
+  display: grid;
+  gap: 15px;
 }

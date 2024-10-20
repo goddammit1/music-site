@@ -1,5 +1,5 @@
-import Img from './assets/cupsize_album1.jpg'
-import Img1 from './assets/dd.jpg'
+import Img from './assets/albums/cupsize_album1.jpg'
+import Img1 from './assets/tracks/dd.jpg'
 
 export const ALBUMS = [
     {

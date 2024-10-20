@@ -1,4 +1,4 @@
-import Img from './assets/dd.jpg'
+import Img from './assets/tracks/dd.jpg'
 
 export const TRACKS = [
     {

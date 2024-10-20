@@ -1,124 +1,268 @@
-.sign_cont {    /*подгонка кнопок регистрации по правому краю*/
-    margin-left: 800px;
-    display:flex;
-    position: relative;
+.sign_cont {
+  /*подгонка кнопок регистрации по правому краю*/
+  margin-left: 800px;
+  display: flex;
+  position: relative;
 }
-.sign_in {      /*кнопка войти*/
-    transition: .4s ease;
-    font-size: 1.2rem;
-    background-color: rgb(0, 0, 0, 0);
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    margin-right: 1em;
-    border-radius: 22.5px;
-    color: #CEB564;
-    border: 3px solid #CEB564;
-    width: 140px;
-    height: 45px;
+.sign_in {
+  /*кнопка войти*/
+  transition: 0.4s ease;
+  font-size: 1.2rem;
+  background-color: rgb(0, 0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-right: 1em;
+  border-radius: 22.5px;
+  color: #ceb564;
+  border: 3px solid #ceb564;
+  width: 140px;
+  height: 45px;
 }
-.sign_up {      /*кнопка регистрация*/
-    transition: .4s ease;
-    font-size: 1.2rem;
-    background-color: rgb(0, 0, 0, 0);
-    border: none;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 22.5px;
-    margin: auto;
-    background-color: #CEB564;
+.sign_up {
+  /*кнопка регистрация*/
+  transition: 0.4s ease;
+  font-size: 1.2rem;
+  background-color: rgb(0, 0, 0, 0);
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 22.5px;
+  margin: auto;
+  background-color: #ceb564;
+  color: #dadada;
+  width: 140px;
+  height: 45px;
+}
+.sign_up:hover {
+  /*увеличение кнопки при наводке*/
+  cursor: pointer;
+  transform: scale(1.05);
+}
+.sign_in:hover {
+  /*увеличение кнопки при наводке*/
+  cursor: pointer;
+  transform: scale(1.05);
+}
+.MusicCard {
+  /* плитка рандомного трека */
+  color: #dadada;
+  box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.5);
+  height: 340px;
+  width: 250px;
+  border-radius: 20px;
+}
+.MusicCardImg {
+  user-select: none; /*подгонка обложки трека под плитку*/
+  width: 250px;
+  height: 250px;
+  border-radius: 20px;
+}
+
+.play_button {
+  /*зона кнопки*/
+  transition: 0.3s ease;
+  border-radius: 20px;
+  display: flex;
+  margin: auto;
+  position: relative;
+  bottom: 253px;
+  height: 250px;
+  width: 250px;
+}
+.play_button1 {
+  /*кнопка play*/
+  opacity: 0;
+  transition: 0.2s ease;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #dadada;
+}
+
+.play_button:hover .play_button1 {
+  /*появление кнопки при наведении*/
+  transform: scale(1.1);
+  opacity: 1;
+}
+.play_button:hover {
+  /*затемнение фона при наведении*/
+  cursor: pointer;
+  background-color: rgb(0, 0, 0, 0.3);
+}
+
+.music_name {   /*настройка шрифта названия трека*/
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.music_ref {    /*смещение названия и исполнителя трека*/
+  position: relative;
+  bottom: 250px;
+  margin-left: 1em;
+}
+
+.album-panel {  /* виджет альбомов*/
+  font-size: 0.7em;
+  border-radius: 20px;
+  color: #dadada;
+  box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.5);
+  height: 170px;
+  width: 340px;
+}
+.albums-panel-area {    /*отступ внутри виджета альбомов*/
+  margin: 20px;
+}
+.album_imges { /*зона 3 альбомов*/
+  display: flex;
+  gap: 15px;
+}
+.album_img {    /*настройка изображения альбома*/
+  user-select: none;
+  width: 90px;
+  height: 90px;
+  border-radius: 15px;
+}
+.play_button_album {    /*!доделать появление кнопки play при наводке на альбом!*/
+  width: 40px;
+  height: 40px;
+  background-color: #dadada;
+  border-radius: 50%;
+}
+.album_img:hover {      /*изменение курсора при наводке на альбом*/
+  cursor: pointer;
+}
+
+.Artist_area {  /*зона 2 виджетов исполнителей*/
+  gap: 50px;
+  position: relative;
+  display: flex;
+  height: fit-content;
+}
+
+.Artist-img {   /* настройка аватарки исполнителя*/
+  margin-left: 6px;
+  user-select: none;
+  width: 115px;
+  height: 115px;
+  border-radius: 50%;
+}
+.Artist { /*виджет исполнителя*/
+  display: grid;
+  margin: auto;
+  transition: 0.2s ease;
+}
+.Artist:hover { /*увеличение при наводке на виджет*/
+  transform: scale(1.1);
+  cursor: pointer;
+}
+.Artist_font {  /*настройка шрифта исполнителя*/
+  text-align: center;  
+  position: relative;
+  bottom: 15px;
+  background-color: black;
+  padding: 4px 6px;
+  margin: 0;
+  font-size: 1.3em;
+}
+
+.New_Tracks_area {
+    box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.5);
     color: #dadada;
-    width: 140px;
-    height: 45px;
-}
-.sign_up:hover {    /*увеличение кнопки при наводке*/
-    cursor:pointer;
-    transform: scale(1.05);
-}
-.sign_in:hover {    /*увеличение кнопки при наводке*/
-    cursor:pointer;
-    transform: scale(1.05);
-}
-.MusicCard {                                        /* плитка рандомного трека */
-    color: #dadada;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-    height: 340px;
-    width: 250px;
-    border-radius: 20px;
-}
-.MusicCardImg {  
-    user-select: none;   /*подгонка обложки трека под плитку*/
-    width: 250px;
-    height: 250px;
-    border-radius: 20px;
-}
-
-.play_button {      /*зона кнопки*/
-    transition: .3s ease;
-    border-radius: 20px;
-    display:flex;
-    margin: auto;
+    width: 620px;
+    height: 195px;
+    display: flex;
     position: relative;
-    bottom:253px;   
-    height: 250px;
-    width: 250px;
+    border-radius: 20px;
 }
-.play_button1{      /*кнопка play*/
-    opacity: 0;;
-    transition: .2s ease;
-    margin: auto;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: #dadada;
+.new_tracks_fonts {
+    font-size: 1.5em;
+    text-align: left;
+    display: block;
 }
-
-.play_button:hover .play_button1 {    /*появление кнопки при наведении*/
-    transform: scale(1.1);
-    opacity: 1;
-}   
-.play_button:hover {    /*затемнение фона при наведении*/
-    cursor: pointer;
-    background-color: rgb(0, 0, 0, 0.3);
+.New_Tracks {
+    align-items: center;
+    display: flex;
+    margin: 15px;
 }
-
-.music_name {
+.NEW-font {
+    font-size: 2.3em;
+    color: #ceb564;
+    margin: 0;
+}
+.TRACKS-font {
+    font-size: 1.7em;
+    margin: 0;
+}
+.tracks_widgets_area {
+    display: flex;
+    gap: 15px;
+    transform: scale(0.5) translateX(-345px);
+}
+.Playlist_area {
+    box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.5);
+    width: 315px;
+    height: 410px;
+    border-radius: 20px;
     margin-top: 5px;
-    margin-bottom: 5px;
 }
-.music_ref {
-    position: relative;
-    bottom:250px;
-    margin-left: 1em;
-} 
-
-.album-panel{
-    font-size: 0.7em;
-    border-radius: 20px;
-    margin-left: 20px;
-    color: #dadada;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-    height: 170px;
-    width: 340px;
-}
-.albums-panel-area {
+.Playlist {
+    align-items: center;
     margin: 20px;
 }
-.album_img {
-    margin-right: 15px;
+.Playlist_font {
+    font-size: 1.3em;
+}
+
+
+.Track_widget_area {
+    margin:auto;
+    display: flex;
+    width: 285px;
+    height: 45px;
+}
+.Track_widget_img {
     user-select: none;
-    width: 90px;
-    height: 90px;
-    border-radius: 15px;
+    border-radius: 3px;
+    width: 45px;
+    height: 45px;
 }
-.play_button_album {
-    width: 40px;
-    height: 40px;
-    background-color: #dadada;
-    border-radius:50%;
-}
-.album_img:hover {
+.Track_widget_img:hover {
     cursor: pointer;
+}
+.music_info {
+    text-align: left;
+    position: relative;
+    margin-left: 7px;
+    margin-top: auto;
+    margin-bottom: auto;
+    min-width: 150px;
+    max-width: 150px;
+
+}
+.track_widget_font {
+    font-size: 1em;
+    margin:0;
+}
+.track_widget_font1{
+    margin: 0;
+    font-size: 0.8em;
+}
+.track_time {
+    display:flex;
+    justify-content: center;
+    margin-left: 30px;
+    text-align: center;
+    width: 45px;
+    height: 45px;
+    position: relative;
+}
+.track_widget_time_font {
+    margin:auto;
+}
+.playlist_tracks_area {
+    display: grid;
+    gap: 12px;
 }
