@@ -23,13 +23,14 @@ body {
 /*основной контейнер*/
 .main-panel {
   display: flex;
-  height: 1800px;
+  height: fit-content;
   margin-right: auto;
   margin-left: auto;
   width: 1030px;
   background-color: #1e1e1e;
 }
 .main-panel-area {
+  gap: 20px;
   display: flex;
   margin: 2.5em;
 }

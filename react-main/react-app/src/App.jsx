@@ -6,6 +6,7 @@ import Albums from "./parts/Albums";
 import Artist from "./parts/Artist";
 import NewTracks from "./parts/New_tracks";
 import Playlist from "./parts/Playlist";
+import MainWidget from "./parts/Main-widget";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               </div>
             </div>
           </div>
+          <MainWidget></MainWidget>
         </div>
       </div>
     </>
