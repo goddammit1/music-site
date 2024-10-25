@@ -7,7 +7,7 @@ function LikedTracks() {
             <h4>
                 LIKED
             </h4>
-            <div className="Listening_tracks_area"> {/*максимум 4 трека может быть видно */}
+            <div className="L_tracks_area"> {/*максимум 4 трека может быть видно */}
                 <TrackWidget></TrackWidget>
                 <TrackWidget></TrackWidget>
                 <TrackWidget></TrackWidget>

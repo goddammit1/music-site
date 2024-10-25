@@ -279,7 +279,7 @@
     height: 300px;
     width: fit-content;
 }
-.Listening_tracks_area {
+.L_tracks_area {
     gap: 15px;
     display: grid;
 }
