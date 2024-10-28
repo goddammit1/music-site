@@ -1,0 +1,50 @@
+body {
+  background-color: #131313;
+  border: 0px;
+  padding: 0;
+  margin: 0;
+  font-family: "Programme", Arial, sans-serif;
+  color: #dadada;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/*верх страницы*/
+.header {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 130px;
+  background: linear-gradient(to right, #363636, #121212);
+}
+
+/*основной контейнер*/
+.main-panel {
+  display: flex;
+  height: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+  width: 1030px;
+  background-color: #1e1e1e;
+}
+.main-panel-area {
+  gap: 20px;
+  display: flex;
+  margin: 2.5em;
+}
+.albums-artists {
+  display: grid;
+  gap: 30px;
+  height: fit-content;
+}
+.Flex {
+  display: flex;
+  gap:20px;
+}
+.Gird {
+  height: fit-content;
+  display: grid;
+  gap: 15px;
+}
