@@ -1,0 +1,494 @@
+body {
+    background-color: #131313;
+    border: 0px;
+    padding: 0;
+    margin: 0;
+    font-family: "Programme", Arial, sans-serif;
+    color: #dadada;
+}
+
+.body_settings {
+    height: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.img {
+    position: relative;
+    height: 250px;
+    width: 250px;
+    margin-left: auto;
+    margin-right: 0;
+}
+.img250px {
+    display:flex;
+}
+.music_panel_area {
+    margin-left: 400px;
+    margin-right: 400px;
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    bottom: 23px;
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.3s ease, .5s .2s cubic-bezier(.77,0,.18,1);;
+}
+
+.music_panel_area.hidden {
+    cursor: default;
+    bottom: -30px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.music_panel_area:hover .music_panel {
+    transform: scale(1.1);
+}
+.music_panel {
+    pointer-events: all;
+    margin: auto;
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+    align-items: center;
+    width: 1055px;
+    background-color: #1E1E1E;
+    height: 109px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.7);
+    transition: .5s .1s cubic-bezier(.77,0,.18,1);
+}
+.music_panel_hidden {
+    z-index: 1;
+    justify-content: flex-end;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    bottom: 23px;
+    pointer-events: all;
+    align-items: center;
+    background-color: #1E1E1E;
+    opacity:0;
+    width: 50%;
+    height: 50px;
+    border-radius: 8px;
+    transition:opacity .05s .1s ease, .5s .1s cubic-bezier(.77,0,.18,1);
+}
+
+.music_panel_hidden.open {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+    background-color: #b8b8b8;
+    height: 8px;
+    width: 15%;
+    opacity: 1;
+    pointer-events: none;
+}
+
+.track_panel_buttons {
+    display: flex;
+    flex-direction: row;
+    transform: translateX(70px);
+    gap: 0.5em;
+    margin-left: -2.5em;
+
+}
+
+.volume_panel {
+    margin-left: 1.5em;
+    transform: scale(1.2);
+    position: absolute;
+}
+
+
+.volume-rectangle {
+    transition: opacity .2s ease, height .2s, top .4s ease;
+    opacity:0;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    cursor: pointer; /* Курсор в виде указателя */
+    width: 50px; /* Ширина прямоугольника */
+    height: 180px; /* Высота прямоугольника */
+    background-color: #1E1E1E; /* Цвет прямоугольника */
+    position: absolute; /* Позиционируем относительно родителя */
+    z-index: 1;
+    top: -180px; /* Располагаем над кнопкой */
+    left: 50%; /* Центрируем по горизонтали относительно кнопки */
+    transform: translateX(-50%); /* Корректируем смещение для центрирования */
+    z-index: 100; /* Установите порядок расположения слоя */
+}
+
+.white-stripe {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    width: 7px; /* Тонкая ширина полоски */
+    height: 70%; /* Высота полоски равна высоте прямоугольника */
+    background-color: white; /* Цвет полоски */
+    position: absolute; /* Позволяет позиционировать полоску внутри прямоугольника */
+    z-index: 1;
+    left: 50%; /* Центрируем полоску внутри прямоугольника */
+    transform: translateX(-50%); /* Корректируем смещение для центрирования */
+    bottom: 20%; /* Начинаем с нижней части прямоугольника */
+    transition: background-color 0.3s; /* Плавный переход цвета */
+}
+
+.lvl-strip {
+    width: 8px; /* Тонкая ширина полоски */
+    height: 1px; /* Высота полоски равна высоте прямоугольника */
+    background: linear-gradient(0deg, #1E1E1E, #5F5F5F);
+    position: absolute; /* Позволяет позиционировать полоску внутри прямоугольника */
+    z-index: 2;
+    border-bottom-left-radius:15px;
+    border-bottom-right-radius:15px;
+    left: 50%; /* Центрируем полоску внутри прямоугольника */
+    transform: translateX(-50%); /* Корректируем смещение для центрирования */
+    bottom: 19%; /* Начинаем с нижней части прямоугольника */
+    transition: background-color 0.3s; /* Плавный переход цвета */
+}
+
+.volume-level {
+    position: absolute;
+    top: 155px; /* Расстояние от белой полосы */
+    left: 50%; /* Центрирование */
+    transform: translateX(-50%);
+    font-size: 10px; /* Размер шрифта */
+    color: white; /* Цвет текста */
+}
+
+#volumeLevel {
+    user-select: none; /* Запретить выделение текста */
+}
+
+.slider {
+    margin-top:2px;
+    pointer-events: none;
+    position: absolute;
+    top: 80%; /* Для выравнивания по вертикали */
+    left: 50%; /* Начальное положение ползунка */
+    width: 16px; /* Увеличенная ширина ползунка */
+    height: 16px; /* Увеличенная высота ползунка */
+    background-color:#757575; /* Цвет ползунка */
+    border-radius: 50%; /* Скругление углов для создания круглого ползунка */
+    transform: translate(-50%, -50%); /* Центрирование ползунка */
+    opacity: 1; /* Значение 1 для полной непрозрачности */
+    z-index: 100;
+
+}
+
+
+#play {
+    transform: scale(2);
+}
+
+#next_track {
+    transform: scale(1.5);
+}
+
+#prev_track {
+    transform: scale(1.5);
+}
+
+.svg_icons_panel {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 90px;
+    gap: 35px;
+    margin-left: -4em;
+
+}
+
+
+.panel {
+    margin: auto;
+    display: flex;
+    background: linear-gradient(to right, #363636, #121212);
+    height: 250px;
+    width: 1030px;
+    align-items: center;
+}
+
+.play_button {
+    width: 130px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 50px;
+    transition: background-color 0.3s;
+}
+
+.play_icon {
+    cursor: pointer; /* Если требуется сделать курсор "в руку" */
+    width: 120%;
+    height: 120%;
+}
+#play {
+    transition: .3s ease;
+}
+.play_button svg {
+    transition: transform 0.3s ease; /* Анимация при наведении */
+}
+
+.play_button:hover svg {
+    transform: scale(1.1); /* Увеличение при наведении */
+}
+.text_panel {
+    margin:auto;
+    color: #f0f0f0;
+    position: relative;
+    margin-left: auto;
+    margin-top: 4em;
+    margin-right: 5em;
+}
+.lyric_panel {
+    position: relative;
+    margin:auto;
+}
+.lyric {
+    color: #dadada;
+    padding: 20px;
+    background-color: #1E1E1E;
+    font: 100 1.125rem / 1.5 "Programme", Arial, sans-serif;
+}
+.actors {
+    position: relative;
+    display: flex;
+    background-color: #1E1E1E;
+    height: 210px;
+    width: 455px;
+}
+.stroke {
+    width: 910px;
+    display: flex;
+    margin:auto;
+}
+.actors_img {
+    right: 9%;
+    position: relative;
+    justify-self: right;
+    top: 20%;
+    height: 126px;
+    width: 126px;
+    border-radius: 50%;
+}
+.actors_name {
+    display: flex;
+    position: relative;
+    margin:auto;
+    left:3em;
+    height: fit-content;
+}
+.actorsimg {
+    margin-left: auto;
+    margin-right: 0;
+    display: flex;
+}
+h1 {
+    background-color: black;
+    padding: 6px 10px;
+}
+.music_info_panel {
+    display: flex;
+    margin-left: auto;
+    margin-right: 2em;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+.img_music_panel {
+    width: 74px;
+    height: 74px;
+    border-radius: 15px;
+}
+.imgmusicpanel {
+    display: flex;
+    margin:auto;
+    margin-right:1em;
+}
+.text_music_panel {
+    margin-top: auto;
+}
+.text_panel_music {
+    font: 100 1.125rem / 1.5 "Programme", Arial, sans-serif;
+}
+.svg_icons {
+    position: relative;
+    display: flex;
+}
+.svg_panel {
+    width: 80px;
+    height: 80px;
+}
+.svg_music_panel {
+    width: 40px;
+    height: 40px;
+}
+.svg_icons_panel {
+    transform: translateX(70px);
+    position: relative;
+    pointer-events: all;
+}
+.text_panel_button {
+    background-color: rgb(0, 0, 0);
+    border: none;
+    width: 100px;
+    height: 70px;
+    border-radius: 15px;
+    margin-right: 10px;
+    transition: transform 0.3s;
+}
+
+.text_panel_button:hover {
+    transform: scale(1.1); /* Увеличение при наведении */
+}
+
+
+.svg_text_panel_button {
+    cursor: pointer;
+    transition: all .2s ease;
+    fill: #dadada;
+    stroke: #ffffff;
+}
+.svg_text_panel_button:hover {
+    transform: scale(1.2);
+    fill:#ffffff
+}
+
+#like.active {
+    opacity: 0.9;
+    fill: #CEB564;
+    stroke:#CEB564;
+
+}
+#like.active:hover {
+    opacity: 1;
+}
+
+#next_up.active {
+    opacity: 0.9;
+    fill: #CEB564;
+    stroke: #CEB564;
+
+}
+#next_up.active:hover {
+    opacity: 1;
+}
+
+#add_playlist.active {
+    opacity: 0.9;
+    fill:#CEB564;
+    stroke:#CEB564;
+
+}
+#add_playlist.active:hover {
+    opacity: 1;
+}
+
+.svg_icons_panel_svg {
+    width: 45px;
+    cursor: pointer;
+    height: 45px;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    fill: #dadada;
+    stroke: #ffffff;
+    stroke-opacity: 0;
+    display: inline-block;
+    transition: box-shadow 0.3s ease, transform .2s ease;
+    position: relative; /* Добавьте это свойство для использования z-index */
+    z-index: 10; /* Установите значение, которое достаточно высоко, чтобы быть поверх других объектов */
+
+}
+
+
+.svg_icons_panel_button {
+    cursor: pointer;
+}
+
+.svg_icons_panel_svg:hover {
+    transform: scale(1.1);
+    fill: #ffffff; /* Цвет заливки */
+    stroke-opacity: 0.8;
+    stroke-width: 10; /* Толщина обводки */
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3)) drop-shadow(0 0 3px rgba(255, 255, 255, 0.1)); /* Уменьшение яркости свечения(0.3) */
+}
+.footer {
+    width: 100%;
+    height:10em;
+}
+.soundtrack {
+    transition: none;
+    pointer-events: all;
+    transform: translateX(70px);
+    padding-left: 10px;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    text-align: center;
+    margin-left: 2em;
+    width: 35%;
+    height:70%
+}
+.soundtrack {
+    position: relative;
+
+
+}
+
+.soundtrack_progressbar {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    transition: .02s;
+    min-width: 0px;
+    height: 100%;
+    background: linear-gradient(to right, #1E1E1E, #5F5F5F);
+    position: relative; /* чтобы кнопка могла положительно влиять на его позицию */
+}
+
+.soundtrack_button {
+    transition: .02s;
+    position: absolute; /* изменено на absolute для движения в пределах родительского контейнера */
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 100%;
+    width: 12px;
+    background-color: #757575;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+
+}
+
+.time_display {
+    transition: .2s ease;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    margin-top:auto;
+    margin-bottom:auto;
+    bottom:50px;
+    right: 40px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    width: 100px;
+    height: 35px;
+    background:#1E1E1E;
+    user-select: none;
+}
+.time_display_current {
+    font-weight: 700;
+    display: flex;
+    font-size: 1.05rem;
+    right:0px;
+    position: relative;
+    text-align: center;
+    margin:auto;
+}
