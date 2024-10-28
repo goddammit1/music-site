@@ -101,32 +101,34 @@ body {
 }
 
 .volume_panel {
-    bottom: 75px;
-    display: block;
     transform: scale(0.9) translateX(110px);
 }
-.volume-slider {
-    position: relative;
-    bottom: 40px;
-    opacity: 0;
-}
-#volume_button:hover  .volume-slider {
+.volume_panel:hover .volume-rectangle {
     opacity: 1;
+    pointer-events: all;
+    height: 220px;
+    top: -229px;
+}
+.volume_panel:hover .white-stripe {
+    opacity: 1;
+    pointer-events: all;
+    height: 150px;
 }
 
 
 .volume-rectangle {
+    pointer-events: none;
     transition: opacity .2s ease, height .2s, top .4s ease;
     opacity:0;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
-    border-radius: 15px;
+    border-radius: 20px;
     cursor: pointer; /* Курсор в виде указателя */
-    width: 50px; /* Ширина прямоугольника */
-    height: 180px; /* Высота прямоугольника */
+    width: 66px; /* Ширина прямоугольника */
+    height: 100px; /* Высота прямоугольника */
     background-color: #1E1E1E; /* Цвет прямоугольника */
     position: absolute; /* Позиционируем относительно родителя */
     z-index: 1;
-    top: -180px; /* Располагаем над кнопкой */
+    top: -200px; /* Располагаем над кнопкой */
     left: 50%; /* Центрируем по горизонтали относительно кнопки */
     transform: translateX(-50%); /* Корректируем смещение для центрирования */
     z-index: 100; /* Установите порядок расположения слоя */
@@ -135,19 +137,19 @@ body {
 .white-stripe {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
-    width: 7px; /* Тонкая ширина полоски */
-    height: 70%; /* Высота полоски равна высоте прямоугольника */
+    width: 9px; /* Тонкая ширина полоски */
+    height: 60px; /* Высота полоски равна высоте прямоугольника */
     background-color: white; /* Цвет полоски */
     position: absolute; /* Позволяет позиционировать полоску внутри прямоугольника */
     z-index: 1;
     left: 50%; /* Центрируем полоску внутри прямоугольника */
     transform: translateX(-50%); /* Корректируем смещение для центрирования */
-    bottom: 20%; /* Начинаем с нижней части прямоугольника */
-    transition: background-color 0.3s; /* Плавный переход цвета */
+    bottom: 17%; /* Начинаем с нижней части прямоугольника */
+    transition: background-color 0.3s ease, height .2s ease; /* Плавный переход цвета */
 }
 
 .lvl-strip {
-    width: 8px; /* Тонкая ширина полоски */
+    width: 10px; /* Тонкая ширина полоски */
     height: 1px; /* Высота полоски равна высоте прямоугольника */
     background: linear-gradient(0deg, #1E1E1E, #5F5F5F);
     position: absolute; /* Позволяет позиционировать полоску внутри прямоугольника */
@@ -156,7 +158,7 @@ body {
     border-bottom-right-radius:15px;
     left: 50%; /* Центрируем полоску внутри прямоугольника */
     transform: translateX(-50%); /* Корректируем смещение для центрирования */
-    bottom: 19%; /* Начинаем с нижней части прямоугольника */
+    bottom: 16%; /* Начинаем с нижней части прямоугольника */
     transition: background-color 0.3s; /* Плавный переход цвета */
 }
 
@@ -177,10 +179,10 @@ body {
     margin-top:2px;
     pointer-events: none;
     position: absolute;
-    top: 80%; /* Для выравнивания по вертикали */
+    top: 82%; /* Для выравнивания по вертикали */
     left: 50%; /* Начальное положение ползунка */
-    width: 16px; /* Увеличенная ширина ползунка */
-    height: 16px; /* Увеличенная высота ползунка */
+    width: 21px; /* Увеличенная ширина ползунка */
+    height: 21px; /* Увеличенная высота ползунка */
     background-color:#757575; /* Цвет ползунка */
     border-radius: 50%; /* Скругление углов для создания круглого ползунка */
     transform: translate(-50%, -50%); /* Центрирование ползунка */
@@ -487,8 +489,9 @@ h1 {
     text-align: center;
     margin-top:auto;
     margin-bottom:auto;
-    bottom:50px;
+    bottom:30px;
     right: 40px;
+    opacity: 0;
     border-radius: 10px;
     position: relative;
     display: flex;

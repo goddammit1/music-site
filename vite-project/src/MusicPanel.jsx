@@ -43,7 +43,6 @@ const MusicPanel = () => {
             audioRef.current.removeEventListener('timeupdate', updateCurrentTime);
         };
     }, [volume]);
-
     // Обработчики для перетаскивания
     const handleMouseDown = (event) => {
         event.preventDefault();
@@ -53,15 +52,16 @@ const MusicPanel = () => {
     const handleMouseUp = () => {
         setDragging(false);
     };
-
     const handleMouseMove = (event) => {
         if (!dragging) return;
-
+        const timeDisplay = document.querySelector('.time_display');
         const progressBar = document.querySelector('.soundtrack');
         const rect = progressBar.getBoundingClientRect();
-        const offsetX = event.clientX - rect.left;
+        const offsetX = event.clientX - rect.left-5;
         const newProgressPercent = Math.min(Math.max(0, (offsetX / rect.width) * 100), 100);
         const newTime = (newProgressPercent / 100) * duration;
+        timeDisplay.style.opacity = '1';
+        timeDisplay.style.top = '-50px';
 
         audioRef.current.currentTime = newTime;
         setCurrentTime(newTime);
@@ -104,7 +104,8 @@ const MusicPanel = () => {
             <button className="svg_icons_panel_svg" onClick={handlePlay}>
               {/* SVG для воспроизведения/паузы */}
               <svg
-                className="svg_icons_panel_button" id='play_panel_button'
+                className="svg_icons_panel_button"
+                id="play_panel_button"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 500 500"
               >
@@ -129,15 +130,14 @@ const MusicPanel = () => {
             </button>
           </div>
           <div className="volume_panel" style={{ position: "relative" }}>
-            <input /* !слайдер щас вертикальный! */
-              type="range"
-              min="0"
-              max="100"
-              value={volume}
-              onChange={handleVolumeChange}
-              className="volume-slider"
-            />
-            <button className="svg_icons_panel_svg" id='volume_button'>
+            <div id="volumeRectangle" className="volume-rectangle">
+              <div id="white-stripe" className="white-stripe"></div>
+              <div className="volume-level" id="volumeLevel">
+              </div>
+              <div className="slider" id="slider"></div>
+              <div className="lvl-strip" id="lvl-strip"></div>
+            </div>
+            <button className="svg_icons_panel_svg" id="volume_button">
               {/* SVG для регулировки громкости */}
               <svg
                 className="svg_icons_panel_button"
@@ -145,23 +145,18 @@ const MusicPanel = () => {
                 viewBox="0 0 500 500"
               >
                 <path
-                  class="st0"
                   d="M334.355 313.994H127.807c-19.5 0-35.307-15.808-35.307-35.307v-57.374c0-19.5 15.808-35.307 35.307-35.307H334.354v127.988z"
                 />
                 <path
-                  class="st0"
                   d="m292.522 119.21-121.564 66.796V250h163.397V128.213c0-11.635-26.617-17.364-41.833-9.003zM292.522 380.79l-121.564-66.796V250h163.397v121.787c0 11.635-26.617 17.364-41.833 9.003zM395.852 250H407.5c-.34-28.624-21.255-55.652-52.244-68.328-.433 2.932-.851 7.629 0 13.196 4.676 30.592 39.753 35.793 40.596 55.132z"
                 />
                 <path
-                  class="st0"
                   d="M395.852 250H407.5c-.34 28.624-21.255 55.652-52.244 68.328-.433-2.932-.851-7.629 0-13.196 4.676-30.592 39.753-35.793 40.596-55.132z"
                 />
                 <path
-                  class="st0"
                   d="M395.852 250H407.5c-.34-28.624-21.255-55.652-52.244-68.328-.433 2.932-.851 7.629 0 13.196 4.676 30.592 39.753 35.793 40.596 55.132z"
                 />
                 <path
-                  class="st0"
                   d="M395.852 250H407.5c-.34 28.624-21.255 55.652-52.244 68.328-.433-2.932-.851-7.629 0-13.196 4.676-30.592 39.753-35.793 40.596-55.132z"
                 />
               </svg>
@@ -179,29 +174,18 @@ const MusicPanel = () => {
             >
               <div className="time_display" id="time-display">
                 <div className="time_display_current">
-                  {Math.floor(currentTime / 60).toString().padStart(1, "0")}:{(Math.floor(currentTime) % 60).toString().padStart(2, "0")} / {Math.floor(duration / 60).toString().padStart(1, "0")}:{(Math.floor(duration) % 60).toString().padStart(2, "0")}
+                  {Math.floor(currentTime / 60)
+                    .toString()
+                    .padStart(1, "0")}
+                  :{(Math.floor(currentTime) % 60).toString().padStart(2, "0")}{" "}
+                  /{" "}
+                  {Math.floor(duration / 60)
+                    .toString()
+                    .padStart(1, "0")}
+                  :{(Math.floor(duration) % 60).toString().padStart(2, "0")}
                 </div>
               </div>
             </div>
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={progressPercent}
-              onChange={(e) => {
-                const newTime = (e.target.value / 100) * duration;
-                audioRef.current.currentTime = newTime;
-                setCurrentTime(newTime);
-              }}
-              className="progress-slider"
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                opacity: 0,
-              }}
-            />
           </div>
         </div>
       </div>
