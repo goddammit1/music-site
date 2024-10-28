@@ -308,6 +308,7 @@ h1 {
     padding: 6px 10px;
 }
 .music_info_panel {
+    max-height: 109px;
     display: flex;
     margin-left: auto;
     margin-right: 2em;
@@ -327,7 +328,14 @@ h1 {
 .text_music_panel {
     margin-top: auto;
 }
+.textsvg_music_panel {
+    display: grid;
+    height: fit-content;
+}
 .text_panel_music {
+    position: relative;
+    margin: auto;
+    top: 5px;
     font: 100 1.125rem / 1.5 "Programme", Arial, sans-serif;
 }
 .svg_icons {
@@ -343,6 +351,7 @@ h1 {
     height: 40px;
 }
 .svg_icons_panel {
+    bottom: 10px;
     transform: translateX(70px);
     position: relative;
     pointer-events: all;
@@ -425,6 +434,9 @@ h1 {
     transform: scale(1.5);
     
 }
+.svg_icons_panel_button1 {
+    transform: scale(1);
+}
 #play_panel_button {
     transform: scale(2);
 }
@@ -441,10 +453,10 @@ h1 {
     height:10em;
 }
 .soundtrack {
+    position: relative;
     transition: .1s;
     pointer-events: all;
     transform: translateX(100px);
-    padding-left: 10px;
     margin-right: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -453,11 +465,6 @@ h1 {
     margin-left: 2em;
     width: 35%;
     height:70%
-}
-.soundtrack {
-    position: relative;
-
-
 }
 
 .soundtrack_progressbar {
