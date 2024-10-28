@@ -81,7 +81,7 @@ const Player = () => {
             </div>
             <audio ref={audioRef} src="/music/dd.mp3" preload="auto"></audio>
             <div className="img250px">
-                <img className="img" src="assets/img_music/dd.jpg" alt="dd" />
+                <img className="img" src={ddImage} alt="dd" />
             </div>
         </div>
     );

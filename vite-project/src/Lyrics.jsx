@@ -1,6 +1,7 @@
 import React from "react";
 import PsychosisImg from "./avatars/psychosis.jpg";
 import TorontokyoImg from "./avatars/torontokyo.jpg";
+import Actor from "./Actors";
 
 const Lyrics = () => {
     return (
@@ -105,22 +106,8 @@ const Lyrics = () => {
                 </footer>
             </div>
             <div className="actorss">
-                <div className="actors">
-                    <div className="actors_name">
-                        <h1>psychosis</h1>
-                    </div>
-                    <div className="actorsimg">
-                        <img className="actors_img" src={PsychosisImg} alt="psychosis"/>
-                    </div>
-                </div>
-                <div className="actors">
-                    <div className="actors_name">
-                        <h1>torontokyo</h1>
-                    </div>
-                    <div className="actorsimg">
-                        <img className="actors_img" src={TorontokyoImg} alt="torontokyo"/>
-                    </div>
-                </div>
+                <Actor></Actor>
+                <Actor></Actor>
             </div>
 
         </div>

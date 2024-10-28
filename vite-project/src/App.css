@@ -21,6 +21,7 @@ body {
     margin-right: 0;
 }
 .img250px {
+    user-select: none;
     display:flex;
 }
 .music_panel_area {
@@ -53,7 +54,6 @@ body {
     margin: auto;
     display: flex;
     position: relative;
-    justify-content: flex-end;
     align-items: center;
     width: 1055px;
     background-color: #1E1E1E;
@@ -101,9 +101,17 @@ body {
 }
 
 .volume_panel {
-    margin-left: 1.5em;
-    transform: scale(1.2);
-    position: absolute;
+    bottom: 75px;
+    display: block;
+    transform: scale(0.9) translateX(110px);
+}
+.volume-slider {
+    position: relative;
+    bottom: 40px;
+    opacity: 0;
+}
+#volume_button:hover  .volume-slider {
+    opacity: 1;
 }
 
 
@@ -272,25 +280,26 @@ body {
     margin:auto;
 }
 .actors_img {
-    right: 9%;
+    user-select: none;
+    margin-right: 0.8em;
     position: relative;
-    justify-self: right;
     top: 20%;
     height: 126px;
     width: 126px;
     border-radius: 50%;
 }
+input[type=range] { /* вертикальный слайдер по умолчанию*/
+    writing-mode: vertical-lr;
+    direction: rtl;
+    vertical-align: middle;
+}
 .actors_name {
+    font-size: 1.8em;
     display: flex;
     position: relative;
-    margin:auto;
-    left:3em;
+    margin: auto;
+    margin-right: 1.2em;
     height: fit-content;
-}
-.actorsimg {
-    margin-left: auto;
-    margin-right: 0;
-    display: flex;
 }
 h1 {
     background-color: black;
@@ -411,6 +420,11 @@ h1 {
 
 .svg_icons_panel_button {
     cursor: pointer;
+    transform: scale(1.5);
+    
+}
+#play_panel_button {
+    transform: scale(2);
 }
 
 .svg_icons_panel_svg:hover {
@@ -425,9 +439,9 @@ h1 {
     height:10em;
 }
 .soundtrack {
-    transition: none;
+    transition: .1s;
     pointer-events: all;
-    transform: translateX(70px);
+    transform: translateX(100px);
     padding-left: 10px;
     margin-right: 20px;
     margin-top: 10px;
