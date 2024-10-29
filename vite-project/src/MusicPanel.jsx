@@ -133,8 +133,6 @@ const MusicPanel = () => {
           <div className="volume_panel" style={{ position: "relative" }}>
             <div id="volumeRectangle" className="volume-rectangle">
               <div id="white-stripe" className="white-stripe"></div>
-              <div className="volume-level" id="volumeLevel">
-              </div>
               <div className="slider" id="slider"></div>
               <div className="lvl-strip" id="lvl-strip"></div>
             </div>
