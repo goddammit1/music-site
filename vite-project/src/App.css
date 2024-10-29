@@ -118,17 +118,17 @@ body {
 
 .volume-rectangle {
     pointer-events: none;
-    transition: opacity .2s ease, height .2s, top .4s ease;
+    transition: opacity .2s ease, height .2s ease, top .2s ease;
     opacity:0;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
     border-radius: 20px;
     cursor: pointer; /* Курсор в виде указателя */
     width: 66px; /* Ширина прямоугольника */
-    height: 100px; /* Высота прямоугольника */
+    height: 10px; /* Высота прямоугольника */
     background-color: #1E1E1E; /* Цвет прямоугольника */
     position: absolute; /* Позиционируем относительно родителя */
     z-index: 1;
-    top: -200px; /* Располагаем над кнопкой */
+    top: 10px; /* Располагаем над кнопкой */
     left: 50%; /* Центрируем по горизонтали относительно кнопки */
     transform: translateX(-50%); /* Корректируем смещение для центрирования */
     z-index: 100; /* Установите порядок расположения слоя */
@@ -138,7 +138,7 @@ body {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     width: 9px; /* Тонкая ширина полоски */
-    height: 60px; /* Высота полоски равна высоте прямоугольника */
+    height: 3px; /* Высота полоски равна высоте прямоугольника */
     background-color: white; /* Цвет полоски */
     position: absolute; /* Позволяет позиционировать полоску внутри прямоугольника */
     z-index: 1;
